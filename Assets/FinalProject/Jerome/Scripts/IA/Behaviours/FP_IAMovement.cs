@@ -54,7 +54,8 @@ public class FP_IAMovement : MonoBehaviour
     }
     public void RotateTo()
     {
-        Quaternion _angle = Quaternion.LookRotation(moveTarget - transform.position);
+        Vector3 _dir = new Vector3(moveTarget.x, transform.position.y, moveTarget.z);
+        Quaternion _angle = Quaternion.LookRotation(_dir - transform.position);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, _angle, Time.deltaTime * rotateSpeed);
     }
     public bool IsAtRange()
