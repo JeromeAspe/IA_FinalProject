@@ -75,9 +75,12 @@ public class FP_CameraManager : FP_Singleton<FP_CameraManager>, IHandler<string,
         return _exist;
     }
 
-    public FP_CameraBehaviour Get(string _id)
+    public FP_CameraBehaviour Get(string _cameraID)
     {
-        throw new System.NotImplementedException();
+        if (!Exists(_cameraID))
+            return null;
+
+        return allCameras[_cameraID];
     }
 
     public void Remove(FP_CameraBehaviour _camera)
