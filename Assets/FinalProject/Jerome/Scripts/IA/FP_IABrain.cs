@@ -62,21 +62,23 @@ public class FP_IABrain : MonoBehaviour
         };
         detection.OnTargetDetected += (_target) =>
         {
-            movement.SetStateNav(false);
-            movement.SetMoveTarget(_target.TargetPosition);
-            movement.RotateTo();
+            if (!_target.IsDead)
+            {
+                movement.SetMoveTarget(_target.TargetPosition);
+                fsm.SetBool(PatrolParameter, false);
+                fsm.SetBool(waitParameter, false);
+            }
+            else
+            {
+                fsm.SetBool(PatrolParameter, true);
+                
+            }
+            
         };
     }
     protected virtual void InitDetection()
     {
-        detection.OnTargetDetected += (_target) =>
-        {
-
-            fsm.SetBool(attackParameter, true);
-            fightSystem.SetTarget(_target);
-            fightSystem.OnAttack?.Invoke();
-            
-        };
+        
         detection.OnTargetLost += (_position) =>
         {
             //Set research position
@@ -84,8 +86,19 @@ public class FP_IABrain : MonoBehaviour
     }
     protected virtual void InitFight()
     {
-        //InvokeRepeating("fightSystem.UpdateShootState", 0, 0.1f);
-        
+        detection.OnTargetDetected += (_target) =>
+        {
+            if (!_target.IsDead)
+            {
+                fsm.SetBool(attackParameter, true);
+                fightSystem.SetTarget(_target);
+            }
+            else
+            {
+                fsm.SetBool(attackParameter, false);
+            }
+        };
+
     }
     private void Update()
     {
