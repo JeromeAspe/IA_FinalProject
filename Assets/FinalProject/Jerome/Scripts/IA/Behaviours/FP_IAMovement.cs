@@ -39,5 +39,9 @@ public class FP_IAMovement : MonoBehaviour
     {
         return Vector3.Distance(moveTarget, transform.position) < isAtPosDistance;
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(moveTarget, .5f);
+    }
 
 }

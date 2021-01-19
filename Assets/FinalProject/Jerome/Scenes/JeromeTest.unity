@@ -864,7 +864,9 @@ MonoBehaviour:
   - {x: 10, y: 0, z: 10}
   - {x: 0, y: 0, z: 0}
   index: 0
-  agent: {fileID: 0}
+  agent: {fileID: 931956679}
+  isRandomPos: 1
+  radiusRandomPos: 10
 --- !u!1 &990934405
 GameObject:
   m_ObjectHideFlags: 0

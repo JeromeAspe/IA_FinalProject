@@ -9,15 +9,28 @@ public class FP_PatrolBehaviour : MonoBehaviour
     [SerializeField] int index = 0;
     [SerializeField] NavMeshAgent agent = null;
 
-
+    [SerializeField] bool isRandomPos = false;
+    [SerializeField,Range(1,10)] float radiusRandomPos = 10;
     public bool IsValid => points.Count > 1;
     public Vector3 GetNextPoint()
     {
         if (!IsValid) return Vector3.zero;
-        NextPoint();
-        return points[index];
+        if (!isRandomPos)
+        {
+            NextPoint();
+            return points[index];
+        }
+        return GetRandomPoint();
+        
     }
-
+    Vector3 GetRandomPoint()
+    {
+        float _angle = Random.Range(-180, 180);
+        float _x = Mathf.Cos(_angle) *radiusRandomPos + transform.position.x ;
+        float _y = transform.position.y;
+        float _z = Mathf.Sin(_angle)*radiusRandomPos + transform.position.z;
+        return new Vector3(_x, _y, _z);
+    }
     public void NextPoint()
     {
         index++;
@@ -38,6 +51,7 @@ public class FP_PatrolBehaviour : MonoBehaviour
                 Gizmos.DrawLine(points[i], points[i + 1]);
             }
         }
+        
         
     }
 
