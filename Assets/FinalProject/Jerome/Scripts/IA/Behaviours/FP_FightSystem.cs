@@ -33,6 +33,7 @@ public class FP_FightSystem : MonoBehaviour, IShooter
         {
             Shoot(true);
         };
+        OnReload += () => Reload();
         OnAttack += () => Shoot(true);
     }
 
@@ -64,7 +65,11 @@ public class FP_FightSystem : MonoBehaviour, IShooter
     public void Shoot(bool _action)
     {
         if (!IsValid || !canShoot) return;
-        Debug.Log(target.Life);
+        if (currentBulletNB <= 0)
+        {
+            OnReload?.Invoke();
+            return;
+        }
         target.SetDamage(damage);
         currentBulletNB--;
         canShoot = false;
@@ -73,17 +78,12 @@ public class FP_FightSystem : MonoBehaviour, IShooter
     public void UpdateShootState()
     {
         SetTimer();
-        if (currentBulletNB == 0)
-        {
-            OnReload?.Invoke();
-        }
     }
     public void Reload()
     {
         if (!IsValid) return;
+        Debug.Log("d");
         currentBulletNB = bulletsMax;
-        timer = 0;
-        canShoot = false;
     }
     private void OnDestroy()
     {
