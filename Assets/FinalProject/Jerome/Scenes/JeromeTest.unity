@@ -938,6 +938,13 @@ MonoBehaviour:
   detection: {fileID: 1564759521}
   fightSystem: {fileID: 931956681}
   chase: {fileID: 931956682}
+  stats:
+    objectiveAttempts: 0
+    totalRewards: 0
+    totalFails: 0
+    attemptPercentReset: 5
+    globalProgress: 0
+    currentFailProgress: 0
 --- !u!95 &931956676
 Animator:
   serializedVersion: 3
