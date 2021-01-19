@@ -6,7 +6,7 @@ public interface IShooter
     event Action OnShootHit;
     float ShootDistance { get; }
     float ReloadTimeValue { get; }
-    float FireRangeValue { get; }
+    float FireRate { get; }
     int BulletsNumberMax { get; }
     float Timer { get; }
     void SetTimer();

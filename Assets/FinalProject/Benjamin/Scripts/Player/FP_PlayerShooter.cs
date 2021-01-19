@@ -14,7 +14,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 	[SerializeField] GameObject weapon = null;
 	[SerializeField, Range(0, 100)] float shootDistance = 10;
 	[SerializeField, Range(0, 15)] float reloadTimeValue = 5;
-	[SerializeField, Range(0, 10)] float fireRangeValue = 2;
+	[SerializeField, Range(0, 10)] float fireRate = 2;
 	[SerializeField, Range(0, 10)] int bulletsNumberMax = 5;
 
 	// FX
@@ -33,7 +33,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 	// Interfaces
 	public float ShootDistance => shootDistance;
 	public float ReloadTimeValue => reloadTimeValue;
-	public float FireRangeValue => fireRangeValue;
+	public float FireRate => fireRate;
 	public int BulletsNumberMax => bulletsNumberMax;
 	public float Timer => timer;
 	public float DurationFx => durationFx;
@@ -91,7 +91,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 	{
 		if (!isReload || !IsValid) return;
 		timer += Time.deltaTime;
-		if (timer >= (currentBulletsNumber == 0 ? reloadTimeValue : fireRangeValue))
+		if (timer >= (currentBulletsNumber == 0 ? reloadTimeValue : fireRate))
 		{
 			isReload = false;
 			if (currentBulletsNumber == 0) currentBulletsNumber = bulletsNumberMax;
