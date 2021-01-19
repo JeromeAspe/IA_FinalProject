@@ -45,7 +45,7 @@ public class FP_FightSystem : MonoBehaviour, IShooter
 
     public float ReloadTimeValue => reloadTimeValue;
 
-    public float FireRangeValue => fireRate;
+    public float FireRate => fireRate;
 
     public int BulletsNumberMax => bulletsMax ;
 
