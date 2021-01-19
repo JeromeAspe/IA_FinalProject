@@ -1,14 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FP_Player : MonoBehaviour, IHandledItem<int>
+public class FP_Player : MonoBehaviour, IHandledItem<int>, ITarget
 {
 	[SerializeField] int id = 0;
+	[SerializeField,Range(0,100)] int life = 100;
+	[SerializeField,Range(0,100)] int damage = 10;
 	[SerializeField] bool isEnable = true;
 	[SerializeField] FP_CameraSettings playerCameraSettings = new FP_CameraSettings();
 	[SerializeField] ECameraType cameraType = ECameraType.None;
 
+	public event Action<bool> OnNeedHeal;
+	public event Action OnDie;
+	public event Action<float> OnLife;
 
 	public int ID => id;
 
@@ -16,6 +22,14 @@ public class FP_Player : MonoBehaviour, IHandledItem<int>
 	public bool IsEnabled => isEnable;
 	public Vector3 PlayerPosition => transform.position;
 	public Vector3 CameraPosition => playerCameraSettings.TargetPosition + playerCameraSettings.Offset;
+
+	public Vector3 TargetPosition => transform.position;
+
+	public bool IsDead => Life > 0;
+
+	public bool NeedHeal => Life != 100;
+
+	public float Life => life;
 
 	public void SetID(int _id) => id = _id;
 	public void Disable()
@@ -68,5 +82,15 @@ public class FP_Player : MonoBehaviour, IHandledItem<int>
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireCube(CameraPosition, Vector3.one / 2);
 		Gizmos.DrawLine(PlayerPosition, CameraPosition);
+	}
+
+	public void SetDamage(float _damage)
+	{
+		damage = (int)_damage;
+	}
+
+	public void AddLife(float _life)
+	{
+		life += (int)_life;
 	}
 }
