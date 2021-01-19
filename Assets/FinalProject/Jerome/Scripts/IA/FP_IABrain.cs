@@ -6,9 +6,11 @@ using UnityEngine;
 public class FP_IABrain : MonoBehaviour
 {
     [SerializeField] Animator fsm = null;
+    [SerializeField] FP_IAPlayer iaPlayer = null;
 
     public Animator FSM => fsm;
-    public bool IsValid => fsm;
+    public FP_IAPlayer IaPlayer => iaPlayer;
+    public bool IsValid => fsm && iaPlayer;
 
     protected virtual void Start()
     {
