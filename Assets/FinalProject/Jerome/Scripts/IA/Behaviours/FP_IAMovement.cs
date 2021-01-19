@@ -20,6 +20,12 @@ public class FP_IAMovement : MonoBehaviour
     {
         moveTarget = _target;
     }
+    private void Start()
+    {
+        SetMoveTarget(new Vector3(10, 0, 10));
+        InvokeRepeating("MoveTo", 0, .5f);
+        //InvokeRepeating("RotateTo", 0, .5f);
+    }
     public void MoveTo()
     {
         if (IsAtRange())
@@ -27,12 +33,12 @@ public class FP_IAMovement : MonoBehaviour
             OnTargetReached?.Invoke();
             return;
         }
-        agent.Move(moveTarget);
-        transform.position = Vector3.MoveTowards(transform.position, moveTarget, Time.deltaTime * moveSpeed);
+        agent.SetDestination(moveTarget);
+        //transform.position = Vector3.MoveTowards(transform.position, moveTarget, Time.deltaTime * moveSpeed);
     }
     public void RotateTo()
     {
-        Quaternion _angle = Quaternion.LookRotation(transform.position, moveTarget);
+        Quaternion _angle = Quaternion.LookRotation(transform.position, agent.nextPosition);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, _angle,Time.deltaTime*rotateSpeed);
     }
     public bool IsAtRange()
