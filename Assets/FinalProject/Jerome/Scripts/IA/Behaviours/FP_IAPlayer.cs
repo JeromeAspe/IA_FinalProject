@@ -8,6 +8,7 @@ public class FP_IAPlayer : MonoBehaviour, ITarget
     public event Action<bool> OnNeedHeal;
     public event Action OnDie;
     public event Action<float> OnLife;
+    public event Action OnHit;
 
     [SerializeField] float life = 10;
     [SerializeField] float maxLife = 10;
@@ -47,6 +48,7 @@ public class FP_IAPlayer : MonoBehaviour, ITarget
     public void SetDamage(float _damage)
     {
         Life -= life;
+        OnHit?.Invoke();
     }
 
     private void OnDestroy()
