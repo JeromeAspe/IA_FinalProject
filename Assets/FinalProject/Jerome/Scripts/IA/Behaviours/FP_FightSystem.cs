@@ -10,7 +10,6 @@ public class FP_FightSystem : MonoBehaviour, IShooter
     public event Action OnShootHit = null;
     public event Action OnReload = null;
 
-    Transform targetTransform = null;
     ITarget target = null;
     
     [SerializeField,Range(0,100)] float shootDistance = 10;
@@ -19,24 +18,22 @@ public class FP_FightSystem : MonoBehaviour, IShooter
     [SerializeField,Range(0,50)] int bulletsMax = 20;
     [SerializeField,Range(0,50)] int currentBulletNB = 20;
     [SerializeField,Range(0,100)] float damage = 2;
-    bool canShoot = true;
-    float timer = 0;
+    [SerializeField] bool canShoot = true;
+    [SerializeField] float timer = 0;
     public void SetTarget(ITarget _target)
     {
         target = _target;
     }
-    public bool IsValid => targetTransform && target!= null;
+    public bool IsValid => target!= null;
     private void Start()
     {
-        if (!targetTransform) return;
-        target = targetTransform.GetComponent<ITarget>();
         currentBulletNB = bulletsMax;
         
         OnShoot += () =>
         {
             Shoot(true);
         };
-        OnAttack += OnShoot;
+        OnAttack += () => Shoot(true);
     }
 
    
@@ -58,23 +55,24 @@ public class FP_FightSystem : MonoBehaviour, IShooter
         timer += Time.deltaTime;
         if(timer> fireRate)
         {
-            OnShoot?.Invoke();
-            canShoot = false;
+            canShoot = true;
             timer = 0;
         }
     }
 
+
     public void Shoot(bool _action)
     {
         if (!IsValid || !canShoot) return;
+        Debug.Log(target.Life);
         target.SetDamage(damage);
         currentBulletNB--;
+        canShoot = false;
     }
 
     public void UpdateShootState()
     {
         SetTimer();
-        currentBulletNB--;
         if (currentBulletNB == 0)
         {
             OnReload?.Invoke();

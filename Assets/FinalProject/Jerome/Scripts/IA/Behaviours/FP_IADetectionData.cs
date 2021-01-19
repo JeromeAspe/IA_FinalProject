@@ -31,7 +31,7 @@ public class FP_IADetectionData
             currentDistance = _hitObstacle.distance;
         }
         bool _isPlayer = Physics.Raycast(originTransform.position, GetDirectionRay(), out RaycastHit _hitPlayer, GetLength(), _playerMask);
-        ITarget _target =  _hitPlayer.collider?.GetComponent<ITarget>();
+        ITarget _target =  _hitPlayer.collider?.GetComponentInParent<ITarget>();
         TargetDetected = _target != null;
         target = _target;
     }
