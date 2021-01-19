@@ -68,7 +68,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 
     private void Start()
     {
-		OnReload?.Invoke();
+		//OnReload?.Invoke();
 
 	}
 	void Update()=>SetTimer();
@@ -84,12 +84,13 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 		{ 
 			Debug.Log($"{currentBulletsNumber} / {bulletsNumberMax}");
 			SetReload();
-			//FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
+			FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
 		};
 		OnShoot += () =>
 		{ 
+
 			InstantiateFX(ShootFX, ShootPoint, "Audio/Shoot", .1f);
-			//FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
+			FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
 		};
 		OnShootHit += () => InstantiateFX(ShootHitFX, lastHitPoint, "Audio/ShootHit", .1f);
 	}
@@ -138,7 +139,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 	public void Reload(bool _action)
 	{
 		if (!_action || !IsValid || !isReload) return;
-		if (bulletsNumberMax < 0)
+		if (bulletsNumberMax <= 0)
 		{
 			OnReload?.Invoke();
 			bulletsNumberMax = 5;//put a maxvalue

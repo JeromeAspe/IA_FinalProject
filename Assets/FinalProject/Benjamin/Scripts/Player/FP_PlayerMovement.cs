@@ -41,7 +41,9 @@ public class FP_PlayerMovement : MonoBehaviour
 	private void Start()
 	{
 		Init();
-		OnMove?.Invoke();
+
+		if(targetPosition != Vector3.zero)
+			OnMove?.Invoke();
 
 	}
 

@@ -66,7 +66,7 @@ public class FP_Player : MonoBehaviour, IHandledItem<int>, ITarget
 	private void Start()
 	{
 		InitHandledItem();
-		//OnLife += (life) => PF_.Instance?.UpdatePlayerHealthSlider(life);
+		OnLife += (life) => FP_UIManager.Instance?.UpdatePlayerHealthSlider(life);
 		OnLife?.Invoke(life);
 	}
 	void OnDestroy()
@@ -93,17 +93,26 @@ public class FP_Player : MonoBehaviour, IHandledItem<int>, ITarget
 	void InitFSM()
 	{
 		if (!IsValid) return;
-		
+
+		movement.OnMove += () =>
+		{
+			fsm.SetBool(walkParameter, true);
+			
+		};
 
 		shooter.OnShoot += () =>
 		{
 			fsm.SetBool(walkParameter, false);
 			fsm.SetBool(shootParameter, true);
-			if (shooter.BulletsNumberMax == 0)
-				fsm.SetBool(reloadParameter, true);
+	
 		};
 
-		
+		shooter.OnReload += () =>
+		{
+			fsm.SetBool(reloadParameter, true);
+			fsm.SetBool(walkParameter, false);
+			fsm.SetBool(shootParameter, false);
+		};
 	}
 
 	void InitShootInput()
