@@ -57,4 +57,11 @@ public class FP_IAPlayer : MonoBehaviour, ITarget
         OnDie = null;
         OnLife = null;
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.up * 2);
+        Gizmos.color = Color.Lerp(Color.red, Color.green, Life / maxLife);
+        Gizmos.DrawSphere(transform.position + Vector3.up * 2, .5f);
+    }
 }
