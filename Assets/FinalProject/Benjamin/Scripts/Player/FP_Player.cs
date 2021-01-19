@@ -3,16 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FP_Player : MonoBehaviour, IHandledItem<int>, ITarget
+public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 {
-	public event Action<bool> OnNeedHeal;
-	public event Action OnDie;
-	public event Action<float> OnLife;
-
-
-
 	[SerializeField] int id = 0;
-	[SerializeField, Range(0, 100)] int life = 100;
 	[SerializeField, Range(0, 100)] int damage = 10;
 	[SerializeField] bool isEnable = true;
 	[SerializeField] ECameraType cameraType = ECameraType.None;
@@ -31,28 +24,12 @@ public class FP_Player : MonoBehaviour, IHandledItem<int>, ITarget
 	public int ID => id;
 	public bool IsValid => fsm && movement && shooter;
 	public bool IsEnabled => isEnable;
-	public bool IsDead => Life > 0;
-	public bool NeedHeal => Life != 100;
 
 
 	public Vector3 PlayerPosition => transform.position;
 	public Vector3 CameraPosition => playerCameraSettings.TargetPosition + playerCameraSettings.Offset;
-	public Vector3 TargetPosition => transform.position;
 
 
-	public float Life
-	{
-		get => life;
-		set
-		{
-			life = (int)value;
-			life = Mathf.Clamp(life, 0, 100);
-			OnNeedHeal?.Invoke(NeedHeal);
-			OnLife?.Invoke(life);
-			if (IsDead)
-				OnDie?.Invoke();
-		}
-	}
 
 
 
@@ -69,10 +46,11 @@ public class FP_Player : MonoBehaviour, IHandledItem<int>, ITarget
 		OnLife += (life) => FP_UIManager.Instance?.UpdatePlayerHealthSlider(life);
 		OnLife?.Invoke(life);
 	}
-	void OnDestroy()
+	protected override void OnDestroy()
 	{
+		base.OnDestroy();
 		RemoveHandledItem();
-		OnLife = null;
+		
 	}
 
 	public void Enable()
@@ -138,21 +116,13 @@ public class FP_Player : MonoBehaviour, IHandledItem<int>, ITarget
 		FP_PlayerManager.Instance?.Remove(this);
 	}
 
-	void OnDrawGizmos()
+	protected override void OnDrawGizmos()
 	{
+		base.OnDrawGizmos();
 		if (Application.isPlaying) return;
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireCube(CameraPosition, Vector3.one / 2);
 		Gizmos.DrawLine(PlayerPosition, CameraPosition);
 	}
 
-	public void SetDamage(float _damage)
-	{
-		damage = (int)_damage;
-	}
-
-	public void AddLife(float _life)
-	{
-		life += (int)_life;
-	}
 }
