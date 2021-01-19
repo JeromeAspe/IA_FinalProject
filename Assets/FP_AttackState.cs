@@ -10,6 +10,8 @@ public class FP_AttackState : FP_State
         OnEnter += () =>
         {
             _brain.Movement.SetStateNav(false);
+            _brain.Stats.ResetStats();
+            _brain.Stats.AddReward(1);
         };
         OnUpdate += () =>
         {
