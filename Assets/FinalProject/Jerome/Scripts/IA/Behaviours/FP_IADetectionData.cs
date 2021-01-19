@@ -32,7 +32,7 @@ public class FP_IADetectionData
         }
         bool _isPlayer = Physics.Raycast(originTransform.position, GetDirectionRay(), out RaycastHit _hitPlayer, GetLength(), _playerMask);
         ITarget _target =  _hitPlayer.collider?.GetComponentInParent<ITarget>();
-        TargetDetected = _target != null;
+        TargetDetected = _target != null && !_target.IsDead;
         target = _target;
     }
 

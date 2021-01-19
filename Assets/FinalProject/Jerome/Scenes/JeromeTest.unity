@@ -895,6 +895,7 @@ GameObject:
   - component: {fileID: 931956680}
   - component: {fileID: 931956679}
   - component: {fileID: 931956681}
+  - component: {fileID: 931956682}
   m_Layer: 0
   m_Name: IA
   m_TagString: Untagged
@@ -936,6 +937,7 @@ MonoBehaviour:
   patrol: {fileID: 931956680}
   detection: {fileID: 1564759521}
   fightSystem: {fileID: 931956681}
+  chase: {fileID: 931956682}
 --- !u!95 &931956676
 Animator:
   serializedVersion: 3
@@ -1046,6 +1048,19 @@ MonoBehaviour:
   damage: 2
   canShoot: 1
   timer: 0
+--- !u!114 &931956682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931956673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52b4e81b4782e53438666222d1d608c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  searchRadius: 10
 --- !u!1 &990934405
 GameObject:
   m_ObjectHideFlags: 0
@@ -1928,7 +1943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: 10
   angle: 90
-  detectionTickRate: 0.2
+  detectionTickRate: 0.1
   playerLayer:
     serializedVersion: 2
     m_Bits: 512

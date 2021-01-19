@@ -11,22 +11,29 @@ public class FP_IABrain : MonoBehaviour
     [SerializeField] FP_PatrolBehaviour patrol = null;
     [SerializeField] FP_IADetection detection = null;
     [SerializeField] FP_FightSystem fightSystem = null;
+    [SerializeField] FP_SearchBehaviour chase = null;
     
 
 
     string waitParameter = "wait";
     string patrolParameter = "patrol";
     string attackParameter = "attack";
+    string chaseParameter = "chase";
+
+    bool HasKilled = false;
 
     public string WaitParameter => waitParameter;
     public string PatrolParameter => patrolParameter;
+    public string AttackParameter => attackParameter;
+    public string ChaseParameter => chaseParameter;
     public Animator FSM => fsm;
     public FP_IAPlayer IaPlayer => iaPlayer;
     public FP_IAMovement Movement => movement;
     public FP_PatrolBehaviour Patrol => patrol;
     public FP_IADetection Detection => detection;
     public FP_FightSystem FightSystem => fightSystem;
-    public bool IsValid => fsm && iaPlayer && movement && detection && fightSystem;
+    public FP_SearchBehaviour Chase => chase;
+    public bool IsValid => fsm && iaPlayer && movement && detection && fightSystem && chase;
 
     protected virtual void Start()
     {
@@ -67,21 +74,34 @@ public class FP_IABrain : MonoBehaviour
                 movement.SetMoveTarget(_target.TargetPosition);
                 fsm.SetBool(PatrolParameter, false);
                 fsm.SetBool(waitParameter, false);
+                fsm.SetBool(chaseParameter, false);
             }
             else
             {
                 fsm.SetBool(PatrolParameter, true);
-                
+                fsm.SetBool(chaseParameter, false);
+                HasKilled = true;
+
             }
             
         };
+        
     }
     protected virtual void InitDetection()
     {
-        
-        detection.OnTargetLost += (_position) =>
+
+        detection.OnTargetLost += (_pos) =>
         {
-            //Set research position
+            if (HasKilled)
+            {
+                HasKilled = false;
+                return;
+            }
+            
+            fsm.SetBool(PatrolParameter, false);
+            fsm.SetBool(waitParameter, false);
+            fsm.SetBool(chaseParameter, true);
+            chase.SetLastSeenPosition(_pos);
         };
     }
     protected virtual void InitFight()
@@ -98,8 +118,13 @@ public class FP_IABrain : MonoBehaviour
                 fsm.SetBool(attackParameter, false);
             }
         };
+        detection.OnTargetLost += (_pos) =>
+        {
+            fsm.SetBool(attackParameter, false);
+        };
 
     }
+    
     private void Update()
     {
         fightSystem.UpdateShootState();

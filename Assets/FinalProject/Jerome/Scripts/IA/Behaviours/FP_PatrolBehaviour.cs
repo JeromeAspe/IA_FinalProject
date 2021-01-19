@@ -25,7 +25,7 @@ public class FP_PatrolBehaviour : MonoBehaviour
     }
     Vector3 GetRandomPoint()
     {
-        float _angle = Random.Range(-180, 180);
+        float _angle = Random.Range(0, 360);
         float _x = Mathf.Cos(_angle) *radiusRandomPos + transform.position.x ;
         float _y = transform.position.y;
         float _z = Mathf.Sin(_angle)*radiusRandomPos + transform.position.z;
