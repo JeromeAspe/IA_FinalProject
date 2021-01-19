@@ -24,7 +24,8 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 
 
 	//Private
-	float timer = 0, currentBulletsNumber = 0;
+	float timer = 0;
+	int currentBulletsNumber = 0;
 	bool isReload = false;
 	Vector3 lastHitPoint = Vector3.zero;
 
@@ -65,6 +66,11 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 
 	private void Awake() => Init();
 
+    private void Start()
+    {
+		OnReload?.Invoke();
+
+	}
 	void Update()=>SetTimer();
 
 	void OnDestroy() => Remove();
@@ -74,8 +80,17 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 		currentBulletsNumber = bulletsNumberMax;
 
 		//OnShoot += () => SetReload();
-		OnReload += () => SetReload();
-		OnShoot += () => InstantiateFX(ShootFX, ShootPoint, "Audio/Shoot", .1f);
+		OnReload += () =>
+		{ 
+			Debug.Log($"{currentBulletsNumber} / {bulletsNumberMax}");
+			SetReload();
+			FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
+		};
+		OnShoot += () =>
+		{ 
+			InstantiateFX(ShootFX, ShootPoint, "Audio/Shoot", .1f);
+			FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
+		};
 		OnShootHit += () => InstantiateFX(ShootHitFX, lastHitPoint, "Audio/ShootHit", .1f);
 	}
 
@@ -107,8 +122,8 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 		if (bulletsNumberMax > 0)
 		{
 
-			OnShoot?.Invoke();
 			bulletsNumberMax -= 1;
+			OnShoot?.Invoke();
 			bool _fireHit = Physics.Raycast(ShootPoint, -weapon.transform.right, out RaycastHit _hit, shootDistance);
 			if (!_fireHit) return;
 			lastHitPoint = _hit.point;
@@ -132,7 +147,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 	
 	void SetReload()
 	{
-		currentBulletsNumber -= 1;
+		currentBulletsNumber = bulletsNumberMax;
 		isReload = true;
 	}
 
