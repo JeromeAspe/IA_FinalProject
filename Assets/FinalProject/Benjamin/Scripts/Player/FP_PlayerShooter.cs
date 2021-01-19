@@ -45,7 +45,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter
 		get
 		{
 			if (!IsValid) return transform.position;
-			return weapon.transform.position - weapon.transform.right * 1.4f;
+			return weapon.transform.position + weapon.transform.forward * 1.4f;
 		}
 	}
 
@@ -54,7 +54,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter
 		get
 		{
 			if (!IsValid) return transform.position;
-			return weapon.transform.position + -weapon.transform.right * shootDistance;
+			return weapon.transform.position + -weapon.transform.forward * shootDistance;
 
 		}
 	}
@@ -161,5 +161,21 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter
 		weapon.SetActive(!weapon.activeSelf);
 	}
 
-
+	void OnDrawGizmos()
+	{
+		if (!IsValid) return;
+		DebugShoot();
+		DebugShootPoint();
+	}
+	void DebugShoot()
+	{
+		Gizmos.color = Color.cyan;
+		Gizmos.DrawRay(ShootPoint, weapon.transform.forward * shootDistance);
+		Gizmos.DrawSphere(ShootPoint + weapon.transform.forward * shootDistance, .1f);
+	}
+	void DebugShootPoint()
+	{
+		Gizmos.color = Color.red;
+		Gizmos.DrawSphere(ShootPoint, .1f);
+	}
 }

@@ -7,6 +7,9 @@ public class FP_Player : MonoBehaviour, IHandledItem<int>
 	[SerializeField] int id = 0;
 	[SerializeField] bool isEnable = true;
 	[SerializeField] FP_CameraSettings playerCameraSettings = new FP_CameraSettings();
+	[SerializeField] ECameraType cameraType = ECameraType.None;
+
+
 	public int ID => id;
 
 	public bool IsValid => true;
@@ -21,6 +24,11 @@ public class FP_Player : MonoBehaviour, IHandledItem<int>
 		FP_CameraManager.Instance?.Disable($"Player {ID}");
 	}
 
+	private void Start() => InitHandledItem();
+
+
+	void OnDestroy() => RemoveHandledItem();
+
 	public void Enable()
 	{
 		isEnable = true;
@@ -29,13 +37,23 @@ public class FP_Player : MonoBehaviour, IHandledItem<int>
 
 	public void InitHandledItem()
 	{
+
 		InitCamera();
 		FP_PlayerManager.Instance?.Add(this);
 	}
 
 	void InitCamera()
 	{
-		//FP_CameraManager.Instance?.CreateCamera<FP_CameraFPSBehaviour>($"Player{ID}", playerCameraSettings, transform);
+		switch (cameraType)
+		{
+			case ECameraType.FPS:
+				//FP_CameraManager.Instance?.CreateCamera<FP_CameraFPSBehaviour>($"Player{ID}", playerCameraSettings, transform);
+				FP_CameraManager.Instance?.CreateCamera(ECameraType.FPS, transform, $"{ID}");
+
+				break;
+			case ECameraType.None:
+				break;
+		}
 
 	}
 

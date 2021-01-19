@@ -30,6 +30,7 @@ public abstract class FP_CameraBehaviour : MonoBehaviour,IHandledItem<string>
     }
     public virtual void OnDrawGizmos() => visualDebug.DrawVisualDebug(settings, CameraPosition, CameraFinalPosition);
 
+    public void SetSettings(FP_CameraSettings _settings) => settings = _settings;
 
 
     #endregion Unity Methods
