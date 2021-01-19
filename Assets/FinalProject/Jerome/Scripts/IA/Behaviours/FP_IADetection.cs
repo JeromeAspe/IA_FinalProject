@@ -24,6 +24,14 @@ public class FP_IADetection : MonoBehaviour
     {
         GenerateRays();
         InvokeRepeating("UpdateDetection", 0, detectionTickRate);
+        OnTargetDetected += (_target) =>
+        {
+            //Debug.Log($"position {_target.TargetPosition}");
+        };
+        OnTargetLost += (pos) =>
+        {
+            //Debug.Log($"Lost {pos}");
+        };
     }
     void GenerateRays()
     {
@@ -70,8 +78,12 @@ public class FP_IADetection : MonoBehaviour
     {
         UpdateDebug();
     }
-
-
-
+    private void OnDestroy()
+    {
+        OnUpdateDebug = null;
+        OnUpdateDetection = null;
+        OnTargetDetected = null;
+        OnTargetLost = null;
+    }
 
 }

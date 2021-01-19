@@ -30,8 +30,8 @@ public class FP_IADetectionData
         {
             currentDistance = _hitObstacle.distance;
         }
-        bool _isPlayer = Physics.Raycast(originTransform.position, GetDirectionRay(), out RaycastHit _hitPlayer, maxDistance, _playerMask);
-         ITarget _target =  _hitPlayer.collider?.GetComponent<ITarget>();
+        bool _isPlayer = Physics.Raycast(originTransform.position, GetDirectionRay(), out RaycastHit _hitPlayer, GetLength(), _playerMask);
+        ITarget _target =  _hitPlayer.collider?.GetComponent<ITarget>();
         TargetDetected = _target != null;
         target = _target;
     }
@@ -47,7 +47,6 @@ public class FP_IADetectionData
 
     public void DrawDetectionRay()
     {
-        Debug.Log("draw");
         Debug.DrawRay(originTransform.position, GetDirectionRay() * GetLength(),Color.green);
     }
 }
