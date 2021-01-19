@@ -600,6 +600,7 @@ GameObject:
   - component: {fileID: 931956674}
   - component: {fileID: 931956675}
   - component: {fileID: 931956676}
+  - component: {fileID: 931956677}
   m_Layer: 0
   m_Name: IA
   m_TagString: Untagged
@@ -635,6 +636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fsm: {fileID: 0}
+  iaPlayer: {fileID: 0}
 --- !u!95 &931956676
 Animator:
   serializedVersion: 3
@@ -654,6 +656,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &931956677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931956673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5c06b838779ad47b28af0047ab6524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveTarget: {x: 0, y: 0, z: 0}
+  isAtPosDistance: 1
+  moveSpeed: 2
+  rotateSpeed: 10
 --- !u!1 &1355435821
 GameObject:
   m_ObjectHideFlags: 0
