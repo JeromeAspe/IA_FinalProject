@@ -94,11 +94,13 @@ public class FP_Player : MonoBehaviour, IHandledItem<int>, ITarget
 	{
 		if (!IsValid) return;
 
+		//à appeler que quand tu moves
 		movement.OnMove += () =>
 		{
 			fsm.SetBool(walkParameter, true);
 			
 		};
+
 
 		shooter.OnShoot += () =>
 		{
@@ -107,6 +109,7 @@ public class FP_Player : MonoBehaviour, IHandledItem<int>, ITarget
 	
 		};
 
+		//à appeler quand que tu reload
 		shooter.OnReload += () =>
 		{
 			fsm.SetBool(reloadParameter, true);
