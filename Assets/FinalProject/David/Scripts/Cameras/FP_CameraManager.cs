@@ -98,6 +98,28 @@ public class FP_CameraManager : FP_Singleton<FP_CameraManager>, IHandler<string,
         OnUpdateManager -= Get(_cameraID).OnUpdateCameraBehaviour;
         allCameras.Remove(_cameraID);
     }
-    #endregion IHandler Interface
 
+    public void CreateCamera(ECameraType _type, Transform _targetTransform,string _cameraID)
+    {
+        GameObject _camera = new GameObject($"Camera { _cameraID}");
+
+        switch (_type)
+        {
+            case ECameraType.FPS:
+                FP_CameraFPSBehaviour _behaviourFPS =  _camera.AddComponent<FP_CameraFPSBehaviour>();
+                _behaviourFPS.Settings.SetTarget(_targetTransform);
+                _behaviourFPS.SetID(_cameraID);
+                _behaviourFPS.Settings.SetOffset(ECameraType.FPS);
+                break;
+            default:
+                break;
+        }
+    }
+    #endregion IHandler Interface
+    
+}
+public enum ECameraType
+{
+    None,
+    FPS,
 }

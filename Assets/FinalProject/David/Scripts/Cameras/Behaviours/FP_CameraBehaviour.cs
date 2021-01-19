@@ -16,6 +16,7 @@ public abstract class FP_CameraBehaviour : MonoBehaviour,IHandledItem<string>
     public Vector3 CameraFinalPosition => settings.TargetPosition + settings.Offset;
     public Vector3 CameraPosition => transform.position;
 
+    public FP_CameraSettings Settings => settings;
     public virtual bool IsValid => cameraComponent;
 
     #endregion F/P
@@ -36,12 +37,15 @@ public abstract class FP_CameraBehaviour : MonoBehaviour,IHandledItem<string>
     #region Custom Methods
     public virtual void InitCamera()
     {
-        if (!cameraComponent)
-            cameraComponent = GetComponent<Camera>();
+        if (!cameraComponent) cameraComponent = GetComponent<Camera>();
+        if (!cameraComponent) cameraComponent = gameObject.AddComponent<Camera>(); //Methode d'extension A FAIRE
         InitHandledItem();
     }
     protected virtual void SmoothLookAt() { }
     protected virtual void SmoothFollow() { }
+
+    public void SetID(string _id) => cameraID = _id;
+
     #endregion Custom Methods
 
     #region Interface IHandledItem

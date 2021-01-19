@@ -35,5 +35,22 @@ public class FP_CameraSettings
         cameraRotationSpeed = _rotationSpeed;
     }
 
+    public void SetTarget(Transform _target) => target = _target;
+
+    public void SetOffset(ECameraType _type)
+    {
+        if (!target) return;
+        switch(_type)
+        {
+            case ECameraType.FPS:
+                yOffset = target.up.y;
+                zOffset = target.forward.z;
+                
+                break;
+            default: 
+                break;
+        }
+    }
+
 }
 
