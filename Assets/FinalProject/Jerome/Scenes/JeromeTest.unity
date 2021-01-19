@@ -601,6 +601,7 @@ GameObject:
   - component: {fileID: 931956675}
   - component: {fileID: 931956676}
   - component: {fileID: 931956677}
+  - component: {fileID: 931956678}
   m_Layer: 0
   m_Name: IA
   m_TagString: Untagged
@@ -636,7 +637,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fsm: {fileID: 0}
-  iaPlayer: {fileID: 0}
+  iaPlayer: {fileID: 931956678}
+  movement: {fileID: 931956677}
 --- !u!95 &931956676
 Animator:
   serializedVersion: 3
@@ -672,6 +674,20 @@ MonoBehaviour:
   isAtPosDistance: 1
   moveSpeed: 2
   rotateSpeed: 10
+--- !u!114 &931956678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931956673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2b7e2490732f454dbf592e43dcb33de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 10
+  maxLife: 10
 --- !u!1 &1355435821
 GameObject:
   m_ObjectHideFlags: 0
