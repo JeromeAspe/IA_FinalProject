@@ -84,12 +84,12 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 		{ 
 			Debug.Log($"{currentBulletsNumber} / {bulletsNumberMax}");
 			SetReload();
-			FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
+			//FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
 		};
 		OnShoot += () =>
 		{ 
 			InstantiateFX(ShootFX, ShootPoint, "Audio/Shoot", .1f);
-			FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
+			//FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
 		};
 		OnShootHit += () => InstantiateFX(ShootHitFX, lastHitPoint, "Audio/ShootHit", .1f);
 	}

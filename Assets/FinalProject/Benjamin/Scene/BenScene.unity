@@ -770,6 +770,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
+  life: 100
+  damage: 10
   isEnable: 1
   playerCameraSettings:
     target: {fileID: 1519831995}
@@ -779,6 +781,12 @@ MonoBehaviour:
     yOffset: 3.2
     zOffset: -3.5
   cameraType: 1
+  fsm: {fileID: 1945727486}
+  movement: {fileID: 1519831998}
+  shooter: {fileID: 1519831997}
+  walkParameter: Is_Walk
+  shootParameter: Is_Shoot
+  reloadParameter: Is_Reload
 --- !u!114 &1519831997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,7 +802,7 @@ MonoBehaviour:
   weapon: {fileID: 2043796708}
   shootDistance: 10
   reloadTimeValue: 5
-  fireRangeValue: 2
+  fireRate: 2
   bulletsNumberMax: 5
   durationFx: 0.5
   shootFX: {fileID: 0}
@@ -1215,11 +1223,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: swat
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: e6360b41e77d19f45b3d2cf31d3732f3,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e14e0e46067ffec4db669e683c7a5e90, type: 2}
+    - target: {fileID: 5866666021909216657, guid: e6360b41e77d19f45b3d2cf31d3732f3,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6360b41e77d19f45b3d2cf31d3732f3, type: 3}
 --- !u!4 &1945727485 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e6360b41e77d19f45b3d2cf31d3732f3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1945727484}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1945727486 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: e6360b41e77d19f45b3d2cf31d3732f3,
     type: 3}
   m_PrefabInstance: {fileID: 1945727484}
   m_PrefabAsset: {fileID: 0}

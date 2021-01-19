@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[RequireComponent(typeof(CharacterController))]
+
 public class FP_PlayerMovement : MonoBehaviour
 {
 	public event Action OnUpdatePlayer = null;
+	public event Action OnMove = null;
 
 
 	#region Serialize Fields
@@ -16,24 +17,23 @@ public class FP_PlayerMovement : MonoBehaviour
 	[SerializeField, Range(0, 10)] float moveSpeed = 4;
 	[SerializeField, Range(0, 10)] float rotateSpeed = 2;
 
-	[SerializeField] FP_PlayerShooter shooter = null;
+
 	#endregion
 
-	FP_Player player = null;
+
 	Vector3 targetPosition = Vector3.zero;
 	Vector3 currentPosition => transform.position;
 	float horizontal = 0, vertical = 0;
 
 	float rotateY = 0, rotateX = 0;
 
-	public bool IsValid => shooter;
+	public bool IsValid => controller;
 
 	private void Awake()
 	{
 		OnUpdatePlayer += () =>
 		{
-			MoveTo();
-			RotateTo();
+			
 		};
 
 	}
@@ -41,23 +41,24 @@ public class FP_PlayerMovement : MonoBehaviour
 	private void Start()
 	{
 		Init();
+		OnMove?.Invoke();
+
 	}
 
 	private void Update()
 	{
 		OnUpdatePlayer?.Invoke();
+		MoveTo();
+		RotateTo();
 	}
 
 	void Init()
 	{
-		if (!shooter) shooter = GetComponent<FP_PlayerShooter>();
-		player = GetComponent<FP_Player>();
+
 		FP_InputManager.Instance?.RegisterAxis(AxisAction.HorizontalMove, UpdateHorizontalMove);
 		FP_InputManager.Instance?.RegisterAxis(AxisAction.VerticalMove, UpdateVerticalMove);
 		FP_InputManager.Instance?.RegisterAxis(AxisAction.HorizontalAxis, UpdateHorizontalRotate);
 		FP_InputManager.Instance?.RegisterAxis(AxisAction.VerticalAxis, UpdateVerticalRotate);
-		FP_InputManager.Instance?.RegisterButton(ButtonAction.Fire,(fire) => shooter.Shoot(fire));
-		FP_InputManager.Instance?.RegisterButton(ButtonAction.Reload,(reload) => shooter.Reload(reload)); 
 		controller = GetComponent<CharacterController>();
 	}
 
@@ -89,7 +90,8 @@ public class FP_PlayerMovement : MonoBehaviour
 	{
 		targetPosition = (transform.right * horizontal) + (transform.forward * vertical);
 		targetPosition.y -= 9.81f; //la gravité
-		controller.Move(targetPosition * Time.deltaTime);
+		controller.Move(targetPosition* ( moveSpeed * Time.deltaTime));
+
 	}
 	#endregion
 
