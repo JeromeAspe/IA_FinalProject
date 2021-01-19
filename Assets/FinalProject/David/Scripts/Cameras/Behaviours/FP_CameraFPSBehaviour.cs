@@ -13,7 +13,7 @@ public class FP_CameraFPSBehaviour : FP_CameraBehaviour
     protected override void SmoothFollow()
     {
 
-        transform.localPosition = settings.TargetPosition + settings.Offset /*+ settings.Target.forward*/;
+        transform.localPosition = settings.TargetPosition + settings.Offset ;
     }
     protected override void SmoothLookAt()
     {
