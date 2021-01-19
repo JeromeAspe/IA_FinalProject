@@ -38,6 +38,11 @@ public class FP_PlayerMovement : MonoBehaviour
 
 	}
 
+	private void Start()
+	{
+		Init();
+	}
+
 	private void Update()
 	{
 		OnUpdatePlayer?.Invoke();
@@ -47,12 +52,12 @@ public class FP_PlayerMovement : MonoBehaviour
 	{
 		if (!shooter) shooter = GetComponent<FP_PlayerShooter>();
 		player = GetComponent<FP_Player>();
-		//inputManager.Instance?.RegisterAxis(AxisAction.HorizontalMove, UpdateHorizontalMove); 
-		//inputManager.Instance?.RegisterAxis(AxisAction.VerticalMove, UpdateVerticalMove); 
-		//inputManager.Instance?.RegisterAxis(AxisAction.HorizontalAxis, UpdateHorizontalRotate); 
-		//inputManager.Instance?.RegisterAxis(AxisAction.VerticalAxis, UpdateVerticalRotate); 
-		//inputManager.Instance?.RegisterButton(ButtonAction.Fire,(fire) => shooter.Shoot(fire)); 
-		//inputManager.Instance?.RegisterButton(ButtonAction.Reload,(reload) => shooter.Reload(reload)); 
+		FP_InputManager.Instance?.RegisterAxis(AxisAction.HorizontalMove, UpdateHorizontalMove);
+		FP_InputManager.Instance?.RegisterAxis(AxisAction.VerticalMove, UpdateVerticalMove);
+		FP_InputManager.Instance?.RegisterAxis(AxisAction.HorizontalAxis, UpdateHorizontalRotate);
+		FP_InputManager.Instance?.RegisterAxis(AxisAction.VerticalAxis, UpdateVerticalRotate);
+		FP_InputManager.Instance?.RegisterButton(ButtonAction.Fire,(fire) => shooter.Shoot(fire));
+		FP_InputManager.Instance?.RegisterButton(ButtonAction.Reload,(reload) => shooter.Reload(reload)); 
 		controller = GetComponent<CharacterController>();
 	}
 
@@ -62,13 +67,13 @@ public class FP_PlayerMovement : MonoBehaviour
 
 	void UpdateVerticalMove(float _v) => vertical = _v * moveSpeed;
 
-	void UpdateHorizontalAxis(float _h)
+	void UpdateHorizontalRotate(float _h)
 	{
 		rotateY += _h * rotateSpeed;
 		rotateY %= 360;
 	}
 
-	void UpdateVerticalAxis(float _v)
+	void UpdateVerticalRotate(float _v)
 	{
 		rotateX += _v * rotateSpeed;
 		float _clampValue = useClampValue ? clampMaxValue : 60;
@@ -97,12 +102,12 @@ public class FP_PlayerMovement : MonoBehaviour
 			MoveTo();
 			RotateTo();
 		};
-		//inputManager.Instance?.UnRegisterAxis(AxisAction.HorizontalMove, UpdateHorizontalMove); 
-		//inputManager.Instance?.UnRegisterAxis(AxisAction.VerticalMove, UpdateVerticalMove); 
-		//inputManager.Instance?.UnRegisterAxis(AxisAction.HorizontalAxis, UpdateHorizontalRotate); 
-		//inputManager.Instance?.UnRegisterAxis(AxisAction.VerticalAxis, UpdateVerticalRotate); 
-		//inputManager.Instance?.UnRegisterButton(ButtonAction.Fire,(fire) => shooter.Shoot(fire)); 
-		//inputManager.Instance?.UnRegisterButton(ButtonAction.Reload,(reload) => shooter.Reload(reload)); 
+		//FP_InputManager.Instance?.UnRegisterAxis(AxisAction.HorizontalMove, UpdateHorizontalMove); 
+		//FP_InputManager.Instance?.UnRegisterAxis(AxisAction.VerticalMove, UpdateVerticalMove); 
+		//FP_InputManager.Instance?.UnRegisterAxis(AxisAction.HorizontalAxis, UpdateHorizontalRotate); 
+		//FP_InputManager.Instance?.UnRegisterAxis(AxisAction.VerticalAxis, UpdateVerticalRotate); 
+		//FP_InputManager.Instance?.UnRegisterButton(ButtonAction.Fire,(fire) => shooter.Shoot(fire)); 
+		//FP_InputManager.Instance?.UnRegisterButton(ButtonAction.Reload,(reload) => shooter.Reload(reload)); 
 	}
 	#region Gizmos
 	private void OnDrawGizmos()

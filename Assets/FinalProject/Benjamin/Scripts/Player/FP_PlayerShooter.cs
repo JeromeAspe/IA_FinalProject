@@ -7,6 +7,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter
 {
 	public event Action OnShoot;
 	public event Action OnShootHit;
+	public event Action OnReload;
 
 
 	// Shoot
@@ -72,7 +73,8 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter
 	{
 		currentBulletsNumber = bulletsNumberMax;
 
-		OnShoot += () => SetReload();
+		//OnShoot += () => SetReload();
+		OnReload += () => SetReload();
 		OnShoot += () => InstantiateFXEffect(ShootFX, ShootPoint, "Audio/Shoot", .1f);
 		OnShootHit += () => InstantiateFXEffect(ShootHitFX, lastHitPoint, "Audio/ShootHit", .1f);
 	}
@@ -118,6 +120,15 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter
 		else Debug.LogError("No ammo");
 	}
 
+	public void Reload(bool _action)
+	{
+		if (!_action || !IsValid || !isReload) return;
+		if (bulletsNumberMax < 0)
+		{
+			OnReload?.Invoke();
+			bulletsNumberMax = 5;//put a maxvalue
+		}
+	}
 	
 	void SetReload()
 	{

@@ -3,4 +3,7 @@
     None,
     Action1,
     Action2,
+    Fire,
+    Reload,
+
 }

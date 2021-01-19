@@ -239,7 +239,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192228501}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.09093773, y: 1, z: -0.113208055}
+  m_LocalPosition: {x: 0.09093773, y: 1.51, z: -0.113208055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2043796712}
@@ -520,6 +520,7 @@ GameObject:
   - component: {fileID: 1066331351}
   - component: {fileID: 1066331350}
   - component: {fileID: 1066331352}
+  - component: {fileID: 1066331353}
   m_Layer: 0
   m_Name: Logic
   m_TagString: Untagged
@@ -573,6 +574,63 @@ MonoBehaviour:
   visualDebugHeight: 3.8
   visualDebugSize: 0.1
   validColor: {r: 1, g: 0, b: 0.87176275, a: 1}
+--- !u!114 &1066331353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066331349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ed75a984dc30747a539337c72ce1eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualDebugHeight: 0
+  visualDebugSize: 0.3
+  validColor: {r: 0, g: 1, b: 0, a: 1}
+  axis:
+  - axisName: Joystick Horizontal
+    axisValue: 0
+    action: 3
+    invertAxis: 0
+  - axisName: Joystick Vertical
+    axisValue: 0
+    action: 4
+    invertAxis: 1
+  - axisName: Horizontal
+    axisValue: 0
+    action: 1
+    invertAxis: 1
+  - axisName: Vertical
+    axisValue: 0
+    action: 2
+    invertAxis: 1
+  - axisName: Mouse X
+    axisValue: 0
+    action: 5
+    invertAxis: 1
+  - axisName: Mouse Y
+    axisValue: 0
+    action: 6
+    invertAxis: 1
+  buttons:
+  - buttonKeyCode: 330
+    buttonState: 0
+    buttonAction: 3
+    buttonValue: 0
+  - buttonKeyCode: 0
+    buttonState: 0
+    buttonAction: 0
+    buttonValue: 0
+  - buttonKeyCode: 114
+    buttonState: 0
+    buttonAction: 4
+    buttonValue: 0
+  - buttonKeyCode: 331
+    buttonState: 0
+    buttonAction: 4
+    buttonValue: 0
 --- !u!1 &1360983068
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,6 +732,8 @@ GameObject:
   - component: {fileID: 1519831995}
   - component: {fileID: 1519831997}
   - component: {fileID: 1519831996}
+  - component: {fileID: 1519831999}
+  - component: {fileID: 1519831998}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -689,7 +749,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519831994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.07, y: 0, z: -1.01}
+  m_LocalPosition: {x: 1.07, y: 2.36, z: -1.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 192228505}
@@ -729,6 +789,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d7e876a0c311b4cbb7dd88cd596463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapon: {fileID: 2043796708}
+  shootDistance: 10
+  reloadTimeValue: 5
+  fireRangeValue: 2
+  bulletsNumberMax: 5
+  durationFx: 0.5
+  shootFX: {fileID: 0}
+  shootHitFX: {fileID: 0}
+--- !u!114 &1519831998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519831994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 434e42da0ae761d4a906b1987c78a026, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 1519831999}
+  useClampValue: 1
+  clampMaxValue: 60
+  clampMinValue: 20
+  moveSpeed: 4
+  rotateSpeed: 2
+  shooter: {fileID: 1519831997}
+--- !u!143 &1519831999
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519831994}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &1555842501
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,7 +852,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &1555842502
 AudioListener:
   m_ObjectHideFlags: 0
@@ -807,7 +912,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1555842501}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.434, y: 1.79, z: -15.5}
+  m_LocalPosition: {x: 1.434, y: 2.31, z: -9.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
