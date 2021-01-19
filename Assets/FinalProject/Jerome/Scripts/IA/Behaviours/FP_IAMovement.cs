@@ -13,6 +13,7 @@ public class FP_IAMovement : MonoBehaviour
     [SerializeField,Range(0,10)] float isAtPosDistance = 1;
     [SerializeField,Range(0,20)] float moveSpeed = 2;
     [SerializeField,Range(0,100)] float rotateSpeed = 10;
+    [SerializeField] NavMeshAgent agent = null;
 
     
     public void SetMoveTarget(Vector3 _target)
@@ -26,6 +27,7 @@ public class FP_IAMovement : MonoBehaviour
             OnTargetReached?.Invoke();
             return;
         }
+        agent.Move(moveTarget);
         transform.position = Vector3.MoveTowards(transform.position, moveTarget, Time.deltaTime * moveSpeed);
     }
     public void RotateTo()

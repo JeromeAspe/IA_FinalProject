@@ -674,6 +674,7 @@ MonoBehaviour:
   isAtPosDistance: 1
   moveSpeed: 2
   rotateSpeed: 10
+  agent: {fileID: 0}
 --- !u!114 &931956678
 MonoBehaviour:
   m_ObjectHideFlags: 0
