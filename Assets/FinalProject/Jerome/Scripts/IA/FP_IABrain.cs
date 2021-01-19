@@ -9,10 +9,14 @@ public class FP_IABrain : MonoBehaviour
     [SerializeField] FP_IAPlayer iaPlayer = null;
     [SerializeField] FP_IAMovement movement = null;
     [SerializeField] FP_PatrolBehaviour patrol = null;
+    [SerializeField] FP_IADetection detection = null;
+    [SerializeField] FP_FightSystem fightSystem = null;
+    
 
 
     string waitParameter = "wait";
     string patrolParameter = "patrol";
+    string attackParameter = "attack";
 
     public string WaitParameter => waitParameter;
     public string PatrolParameter => patrolParameter;
@@ -20,7 +24,9 @@ public class FP_IABrain : MonoBehaviour
     public FP_IAPlayer IaPlayer => iaPlayer;
     public FP_IAMovement Movement => movement;
     public FP_PatrolBehaviour Patrol => patrol;
-    public bool IsValid => fsm && iaPlayer && movement;
+    public FP_IADetection Detection => detection;
+    public FP_FightSystem FightSystem => fightSystem;
+    public bool IsValid => fsm && iaPlayer && movement && detection && fightSystem;
 
     protected virtual void Start()
     {
@@ -45,13 +51,44 @@ public class FP_IABrain : MonoBehaviour
             _states[i].InitState(this);
         }
         InitMovements();
+        InitDetection();
+        InitFight();
     }
     protected virtual void InitMovements()
     {
         Movement.OnTargetReached += () =>
         {
-            Debug.Log("d");
             fsm.SetBool(waitParameter, true);
         };
+        detection.OnTargetDetected += (_target) =>
+        {
+            movement.SetStateNav(false);
+            movement.SetMoveTarget(_target.TargetPosition);
+            movement.RotateTo();
+        };
+    }
+    protected virtual void InitDetection()
+    {
+        detection.OnTargetDetected += (_target) =>
+        {
+
+            fsm.SetBool(attackParameter, true);
+            fightSystem.SetTarget(_target);
+            fightSystem.OnAttack?.Invoke();
+            
+        };
+        detection.OnTargetLost += (_position) =>
+        {
+            //Set research position
+        };
+    }
+    protected virtual void InitFight()
+    {
+        //InvokeRepeating("fightSystem.UpdateShootState", 0, 0.1f);
+        
+    }
+    private void Update()
+    {
+        fightSystem.UpdateShootState();
     }
 }
