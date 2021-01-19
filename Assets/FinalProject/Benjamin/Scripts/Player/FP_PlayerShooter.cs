@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class FP_PlayerShooter : MonoBehaviour, IShooter
+public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 {
 	public event Action OnShoot;
 	public event Action OnShootHit;
@@ -75,8 +75,8 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter
 
 		//OnShoot += () => SetReload();
 		OnReload += () => SetReload();
-		OnShoot += () => InstantiateFXEffect(ShootFX, ShootPoint, "Audio/Shoot", .1f);
-		OnShootHit += () => InstantiateFXEffect(ShootHitFX, lastHitPoint, "Audio/ShootHit", .1f);
+		OnShoot += () => InstantiateFX(ShootFX, ShootPoint, "Audio/Shoot", .1f);
+		OnShootHit += () => InstantiateFX(ShootHitFX, lastHitPoint, "Audio/ShootHit", .1f);
 	}
 
 
@@ -138,7 +138,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter
 
 	
 	
-	void InstantiateFXEffect(GameObject _fx, Vector3 _position, string _audioResources, float _sizeFX = 1)
+	public void InstantiateFX(GameObject _fx, Vector3 _position, string _audioResources, float _sizeFX = 1)
 	{
 		GameObject _effect = Instantiate(_fx, _position, Quaternion.identity);
 		_effect.transform.localScale *= _sizeFX;
@@ -147,7 +147,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter
 	}
 
 	//same but without Audio
-	void InstantiateFXEffect(GameObject _fx, Vector3 _position, float _sizeFX = 1)
+	public void InstantiateFX(GameObject _fx, Vector3 _position, float _sizeFX = 1)
 	{
 		GameObject _effect = Instantiate(_fx, _position, Quaternion.identity);
 		_effect.transform.localScale *= _sizeFX;
