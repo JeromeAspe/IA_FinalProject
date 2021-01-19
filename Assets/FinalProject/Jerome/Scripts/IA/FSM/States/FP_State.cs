@@ -12,7 +12,7 @@ public class FP_State : StateMachineBehaviour
     FP_IABrain brain = null;
 
 
-    public void InitState(FP_IABrain _brain)
+    public virtual void InitState(FP_IABrain _brain)
     {
         brain = _brain;
     }

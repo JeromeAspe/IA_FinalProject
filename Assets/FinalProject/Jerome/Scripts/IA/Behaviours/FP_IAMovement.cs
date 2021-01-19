@@ -20,12 +20,6 @@ public class FP_IAMovement : MonoBehaviour
     {
         moveTarget = _target;
     }
-    private void Start()
-    {
-        SetMoveTarget(new Vector3(10, 0, 10));
-        InvokeRepeating("MoveTo", 0, .5f);
-        //InvokeRepeating("RotateTo", 0, .5f);
-    }
     public void MoveTo()
     {
         if (IsAtRange())
@@ -34,7 +28,7 @@ public class FP_IAMovement : MonoBehaviour
             return;
         }
         agent.SetDestination(moveTarget);
-        //transform.position = Vector3.MoveTowards(transform.position, moveTarget, Time.deltaTime * moveSpeed);
+        
     }
     public void RotateTo()
     {

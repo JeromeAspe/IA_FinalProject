@@ -8,10 +8,18 @@ public class FP_IABrain : MonoBehaviour
     [SerializeField] Animator fsm = null;
     [SerializeField] FP_IAPlayer iaPlayer = null;
     [SerializeField] FP_IAMovement movement = null;
+    [SerializeField] FP_PatrolBehaviour patrol = null;
 
+
+    string waitParameter = "wait";
+    string patrolParameter = "patrol";
+
+    public string WaitParameter => waitParameter;
+    public string PatrolParameter => patrolParameter;
     public Animator FSM => fsm;
     public FP_IAPlayer IaPlayer => iaPlayer;
     public FP_IAMovement Movement => movement;
+    public FP_PatrolBehaviour Patrol => patrol;
     public bool IsValid => fsm && iaPlayer && movement;
 
     protected virtual void Start()
@@ -36,12 +44,14 @@ public class FP_IABrain : MonoBehaviour
         {
             _states[i].InitState(this);
         }
+        InitMovements();
     }
     protected virtual void InitMovements()
     {
         Movement.OnTargetReached += () =>
         {
-            //Wait
+            Debug.Log("d");
+            fsm.SetBool(waitParameter, true);
         };
     }
 }
