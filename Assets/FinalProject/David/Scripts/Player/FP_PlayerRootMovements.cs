@@ -11,7 +11,7 @@ public class FP_PlayerRootMovements : MonoBehaviour
     [SerializeField] string horizontalParam = "Horizontal";
     [SerializeField] string verticalParam = "Vertical";
     [SerializeField] string shootParam = "shoot";
-    float horizontal = 0, vertical = 0;
+    float horizontal = 0, vertical = 0,rotateVertical =0 , rotateHorizontal =0 ;
     bool isActive = true;
 
     public bool IsOnMove => (vertical != 0 || horizontal != 0);
@@ -29,18 +29,18 @@ public class FP_PlayerRootMovements : MonoBehaviour
     {
         FP_InputManager.Instance.UnRegisterAxis(AxisAction.VerticalMove, SetVertical);
         FP_InputManager.Instance.UnRegisterAxis(AxisAction.HorizontalMove, SetHorizontal);
-        FP_InputManager.Instance.UnRegisterAxis(AxisAction.MouseX, SetHorizontal);
-        //FP_InputManager.Instance.UnRegisterAxis(AxisAction.MouseX, SetRotateHorizontal);
-        //FP_InputManager.Instance.UnRegisterAxis(AxisAction.MouseY, SetRotateVertical);
+        //FP_InputManager.Instance.UnRegisterAxis(AxisAction.MouseX, SetHorizontal);
+        FP_InputManager.Instance.UnRegisterAxis(AxisAction.MouseX, SetRotateHorizontal);
+        FP_InputManager.Instance.UnRegisterAxis(AxisAction.MouseY, SetRotateVertical);
     }
     void InitMovements()
     {
         if (!mecanim) mecanim = GetComponent<Animator>();
         FP_InputManager.Instance.RegisterAxis(AxisAction.VerticalMove, SetVertical);
         FP_InputManager.Instance.RegisterAxis(AxisAction.HorizontalMove, SetHorizontal);
-        FP_InputManager.Instance.RegisterAxis(AxisAction.MouseX, SetHorizontal);
-        //FP_InputManager.Instance.RegisterAxis(AxisAction.MouseX, SetRotateHorizontal);
-        //FP_InputManager.Instance.RegisterAxis(AxisAction.MouseY, SetRotateVertical);
+        //FP_InputManager.Instance.RegisterAxis(AxisAction.MouseX, SetHorizontal);
+        FP_InputManager.Instance.RegisterAxis(AxisAction.MouseX, SetRotateHorizontal);
+        FP_InputManager.Instance.RegisterAxis(AxisAction.MouseY, SetRotateVertical);
     }
     public void UpdateValues()
     {
@@ -49,7 +49,8 @@ public class FP_PlayerRootMovements : MonoBehaviour
     }
     void UpdateRotation()
     {
-        //transform.eulerAngles = new Vector3(GetClampedValue(rotateVertical, clampYRotation), transform.eulerAngles.y + rotateHorizontal, 0);
+        Debug.Log(transform.eulerAngles.y + rotateHorizontal);
+        transform.eulerAngles = new Vector3(GetClampedValue(rotateVertical, clampYRotation), transform.eulerAngles.y + rotateHorizontal, 0);
         
     }
 
@@ -70,15 +71,26 @@ public class FP_PlayerRootMovements : MonoBehaviour
         if (!isActive) return;
         horizontal = _value * rotateSpeed;
     }
-    //public float GetClampedValue(float _value, float _clamp)
-    //{
+    public void SetRotateVertical(float _value)
+    {
+        if (!isActive) return;
+        rotateVertical += _value;
+        rotateVertical %= 360;
+    }
+    public void SetRotateHorizontal(float _value)
+    {
+        if (!isActive) return;
+        rotateHorizontal = _value;
+    }
+    public float GetClampedValue(float _value, float _clamp)
+    {
 
-    //    if (_value > _clamp)
-    //        return rotateVertical = _clamp;
-    //    else if (_value < -_clamp)
-    //        return rotateVertical = -_clamp;
-    //    return _value;
-    //}
+        if (_value > _clamp)
+            return rotateVertical = _clamp;
+        else if (_value < -_clamp)
+            return rotateVertical = -_clamp;
+        return _value;
+    }
     public void Disable()
     {
         isActive = false;
