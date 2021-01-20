@@ -21,7 +21,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 	[SerializeField, Range(0, 10)] float durationFx = .5f;
 	[SerializeField] GameObject shootFX = null;
 	[SerializeField] GameObject shootHitFX = null;
-
+	[SerializeField] LayerMask aiMask = 11;
 
 	//Private
 	float timer = 0;
@@ -55,7 +55,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 		get
 		{
 			if (!IsValid) return transform.position;
-			return weapon.transform.position + -weapon.transform.forward * shootDistance;
+			return weapon.transform.position + weapon.transform.forward * shootDistance;
 
 		}
 	}
@@ -69,7 +69,6 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
     private void Start()
     {
 		//OnReload?.Invoke();
-
 	}
 	void Update()=>SetTimer();
 
@@ -87,12 +86,11 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 			FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
 		};
 		OnShoot += () =>
-		{ 
-
-			InstantiateFX(ShootFX, ShootPoint, "Audio/Shoot", .1f);
+		{
+			InstantiateFX(ShootFX, weapon.transform.position, .1f);
 			FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
 		};
-		OnShootHit += () => InstantiateFX(ShootHitFX, lastHitPoint, "Audio/ShootHit", .1f);
+		OnShootHit += () => InstantiateFX(ShootHitFX, transform.position, .1f); //blood
 	}
 
 
@@ -122,12 +120,15 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 
 		if (bulletsNumberMax > 0)
 		{
-
+	
 			bulletsNumberMax -= 1;
 			OnShoot?.Invoke();
-			bool _fireHit = Physics.Raycast(ShootPoint, -weapon.transform.right, out RaycastHit _hit, shootDistance);
+			bool _fireHit = Physics.Raycast(weapon.transform.position, ShootPointWithDistance, out RaycastHit _hit, shootDistance, aiMask);
+			Debug.Log(_fireHit);
 			if (!_fireHit) return;
 			lastHitPoint = _hit.point;
+			Debug.Log(_hit.point);
+			Debug.Log("touché l'ennemi");
 			OnShootHit?.Invoke();
 			Debug.Log("Number of ammo :" + bulletsNumberMax);
 
@@ -186,12 +187,12 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 	void DebugShoot()
 	{
 		Gizmos.color = Color.cyan;
-		Gizmos.DrawRay(ShootPoint, weapon.transform.forward * shootDistance);
-		Gizmos.DrawSphere(ShootPoint + weapon.transform.forward * shootDistance, .1f);
+		Gizmos.DrawRay(weapon.transform.position, weapon.transform.forward * shootDistance);
+		Gizmos.DrawSphere(weapon.transform.position+ weapon.transform.forward * shootDistance, .1f);
 	}
 	void DebugShootPoint()
 	{
 		Gizmos.color = Color.red;
-		Gizmos.DrawSphere(ShootPoint, .1f);
+		Gizmos.DrawSphere(ShootPointWithDistance, .1f);
 	}
 }
