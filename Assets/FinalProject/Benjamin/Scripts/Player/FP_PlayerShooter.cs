@@ -17,7 +17,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
     [SerializeField, Range(0, 10)] float fireRate = 2;
     [SerializeField, Range(0, 10)] int bulletsNumberMax = 5;
     [SerializeField] FP_IAPlayer enemy = null;
-    [SerializeField, Range(0,100)] int damage = 3;
+    [SerializeField, Range(0, 100)] int damage = 3;
     // FX
     [SerializeField, Range(0, 10)] float durationFx = .5f;
     [SerializeField] GameObject shootFX = null;
@@ -28,7 +28,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 
     //Private
     float timer = 0;
-    int currentBulletsNumber = 0;
+    [SerializeField] int currentBulletsNumber = 0;
     bool isReload = false;
     Vector3 lastHitPoint = Vector3.zero;
 
@@ -69,12 +69,13 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
     public GameObject ShootFX => shootFX;
     public GameObject ShootHitFX => shootHitFX;
 
-    private void Awake() => Init();
+    //private void Awake() => 
 
     private void Start()
     {
         FP_InputManager.Instance?.RegisterButton(ButtonAction.Fire, Shoot);
-        FP_InputManager.Instance?.RegisterButton(ButtonAction.Reload,Reload);
+        FP_InputManager.Instance?.RegisterButton(ButtonAction.Reload, Reload);
+        Init();
         //OnReload?.Invoke();
     }
     void Update()
@@ -85,16 +86,16 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
     void OnDestroy()
     {
         FP_InputManager.Instance?.UnRegisterButton(ButtonAction.Fire, Shoot);
-        FP_InputManager.Instance?.UnRegisterButton(ButtonAction.Reload,Reload);
+        FP_InputManager.Instance?.UnRegisterButton(ButtonAction.Reload, Reload);
         Remove();
     }
 
     void Init()
     {
-       
+
         OnReload += () =>
         {
-           
+
             SetReload();
             InstantiateSound(reloadSound, weapon.transform.position, 2);
             FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
@@ -105,6 +106,8 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
             FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
         };
         OnShootHit += () => InstantiateFX(ShootHitFX, lastHitPoint, 2);//blood
+        currentBulletsNumber = BulletsNumberMax;
+
     }
 
 
@@ -133,10 +136,10 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
     {
         if (!_action || !IsValid || isReload) return;
 
-        if (bulletsNumberMax > 0)
+        if (currentBulletsNumber > 0)
         {
 
-            bulletsNumberMax -= 1;
+            currentBulletsNumber -= 1;
             OnShoot?.Invoke();
             bool _fireHit = Physics.Raycast(weapon.transform.position, ShootPointWithDistance, out RaycastHit _hit, shootDistance, aiMask);
             if (!_fireHit) return;
@@ -153,13 +156,8 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
     public void Reload(bool _action)
     {
         if (!_action || !IsValid || !isReload) return;
-        if (bulletsNumberMax >= 0)
-        {
             OnReload?.Invoke();
-            bulletsNumberMax += 10;
-            if (bulletsNumberMax > 10)
-                bulletsNumberMax = 10;
-        }
+            currentBulletsNumber = BulletsNumberMax;
     }
 
     public void SetReload()
@@ -186,9 +184,9 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
         Destroy(_effect, durationFx);
     }
 
-   public void InstantiateSound(AudioClip _audioressources,Vector3 _position, float _duration)
+    public void InstantiateSound(AudioClip _audioressources, Vector3 _position, float _duration)
     {
-        AudioSource.PlayClipAtPoint(_audioressources,_position, _duration);
+        AudioSource.PlayClipAtPoint(_audioressources, _position, _duration);
     }
 
     public void SetWeaponActive()

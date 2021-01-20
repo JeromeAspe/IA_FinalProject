@@ -32,8 +32,8 @@ public class FP_PlayerRootMovements : MonoBehaviour
         //FP_InputManager.Instance.UnRegisterAxis(AxisAction.MouseX, SetHorizontal);
         FP_InputManager.Instance.UnRegisterAxis(AxisAction.MouseX, SetRotateHorizontal);
         FP_InputManager.Instance.UnRegisterAxis(AxisAction.MouseY, SetRotateVertical);
-        FP_InputManager.Instance.UnRegisterAxis(AxisAction.HorizontalAxis, SetRotateHorizontal);
-        FP_InputManager.Instance.UnRegisterAxis(AxisAction.VerticalAxis, SetRotateVertical);
+        //FP_InputManager.Instance.UnRegisterAxis(AxisAction.HorizontalAxis, SetRotateHorizontal);
+        //FP_InputManager.Instance.UnRegisterAxis(AxisAction.VerticalAxis, SetRotateVertical);
     }
     void InitMovements()
     {
@@ -43,8 +43,8 @@ public class FP_PlayerRootMovements : MonoBehaviour
         //FP_InputManager.Instance.RegisterAxis(AxisAction.MouseX, SetHorizontal);
         FP_InputManager.Instance.RegisterAxis(AxisAction.MouseX, SetRotateHorizontal);
         FP_InputManager.Instance.RegisterAxis(AxisAction.MouseY, SetRotateVertical);
-        FP_InputManager.Instance.RegisterAxis(AxisAction.HorizontalAxis, SetRotateHorizontal);
-        FP_InputManager.Instance.RegisterAxis(AxisAction.VerticalAxis, SetRotateVertical);
+        //FP_InputManager.Instance.RegisterAxis(AxisAction.HorizontalAxis, SetRotateHorizontal);
+        //FP_InputManager.Instance.RegisterAxis(AxisAction.VerticalAxis, SetRotateVertical);
     }
     public void UpdateValues()
     {

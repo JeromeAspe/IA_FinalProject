@@ -69,7 +69,7 @@ public class FP_IAMovement : MonoBehaviour
     }
     public bool IsAtRange()
     {
-        return Vector3.Distance(moveTarget, transform.position) < isAtPosDistance;
+        return Vector3.Distance(new Vector3(moveTarget.x,transform.position.y,moveTarget.z), transform.position) < isAtPosDistance;
     }
     private void OnDrawGizmos()
     {
