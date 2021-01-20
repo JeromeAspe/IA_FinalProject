@@ -43,9 +43,9 @@ public class FP_CameraSettings
         switch(_type)
         {
             case ECameraType.FPS:
-                xOffset = -0.3f;
-                yOffset = 1.5f;
-                zOffset = 0;
+                xOffset = -0.2f;
+                yOffset = 1.65f;
+                zOffset = 0f;
 
                 break;
             default: 

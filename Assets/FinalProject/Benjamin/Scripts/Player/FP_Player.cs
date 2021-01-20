@@ -131,7 +131,7 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 		switch (cameraType)
 		{
 			case ECameraType.FPS:
-				FP_CameraManager.Instance?.CreateCamera(ECameraType.FPS, transform, $"{ID}");
+				//FP_CameraManager.Instance?.CreateCamera(ECameraType.FPS, transform, $"{ID}");
 				break;
 			case ECameraType.None:
 				break;
