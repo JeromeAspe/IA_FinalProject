@@ -17,11 +17,6 @@ public class FP_Obstacle : MonoBehaviour
     {
         covers = GetComponentsInChildren<FP_CoverSite>();
     }
-    private void Update()
-    {
-        Debug.Log(GetBestCoverSide().name);
-    }
-    
     Vector3 GetNormalizedVector(Vector3 _position)
     {
         return new Vector3(_position.x, transform.position.y, _position.z);

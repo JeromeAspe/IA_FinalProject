@@ -25,10 +25,6 @@ public class FP_IADetection : MonoBehaviour
     {
         GenerateRays();
         InvokeRepeating("UpdateDetection", 0, detectionTickRate);
-        OnCoverDetected += (_a) =>
-        {
-            Debug.Log(_a.name);
-        };
     }
     void GenerateRays()
     {
