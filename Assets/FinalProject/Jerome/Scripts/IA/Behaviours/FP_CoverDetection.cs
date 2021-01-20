@@ -8,7 +8,7 @@ public class FP_CoverDetection : MonoBehaviour
 {
     public event Action OnUpdateDebug = null;
     public event Action OnUpdateDetection = null;
-    public event Action<FP_ObstacleTest> OnTargetDetected = null;
+    public event Action<FP_Obstacle> OnTargetDetected = null;
 
     [SerializeField, Range(0, 100)] float maxDistance = 10;
     [SerializeField, Range(0, 180)] int angle = 90;

@@ -11,10 +11,10 @@ public class FP_IADetectionData
 
     bool isObstacle = false;
     ITarget target = null;
-    FP_ObstacleTest cover = null;
+    FP_Obstacle cover = null;
 
     public ITarget Target => target;
-    public FP_ObstacleTest Cover => cover;
+    public FP_Obstacle Cover => cover;
     public bool TargetDetected { get; set; } = false;
     public bool CoverDetected { get; set; } = false;
     public Vector3 StartPosition { get; set; } = Vector3.zero;
@@ -34,7 +34,7 @@ public class FP_IADetectionData
         {
             currentDistance = _hitObstacle.distance;
         }
-        FP_ObstacleTest _cover = _hitObstacle.collider?.GetComponentInParent<FP_ObstacleTest>();
+        FP_Obstacle _cover = _hitObstacle.collider?.GetComponentInParent<FP_Obstacle>();
         CoverDetected = _cover != null;
         cover = _cover;
         bool _isPlayer = Physics.Raycast(originTransform.position + Vector3.up * _offset, GetDirectionRay(), out RaycastHit _hitPlayer, GetLength(), _playerMask);

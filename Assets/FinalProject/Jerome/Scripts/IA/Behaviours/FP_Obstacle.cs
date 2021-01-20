@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FP_ObstacleTest : MonoBehaviour
+public class FP_Obstacle : MonoBehaviour
 {
-    [SerializeField] Transform target = null;
+    [SerializeField] Vector3 target = Vector3.zero;
     [SerializeField] FP_CoverSite[] covers = null;
+    [SerializeField] int id = 0;
 
 
-    public Vector3 TargetPos => GetNormalizedVector(target.position);
+    public int ID => id;
+    public void SetTarget(Vector3 _target) => target = _target;
+    public Vector3 TargetPos => GetNormalizedVector(target);
     
     private void Start()
     {
@@ -23,7 +26,7 @@ public class FP_ObstacleTest : MonoBehaviour
     {
         return new Vector3(_position.x, transform.position.y, _position.z);
     }
-    FP_CoverSite GetBestCoverSide()
+    public FP_CoverSite GetBestCoverSide()
     {
         float _angle = 180;
         FP_CoverSite _bestCover = null;
@@ -49,7 +52,7 @@ public class FP_ObstacleTest : MonoBehaviour
     {
         for (int i = 0; i < covers.Length; i++)
         {
-            Gizmos.DrawLine(covers[i].transform.position, target.position);
+            Gizmos.DrawLine(covers[i].transform.position, target);
         }
     }
 }

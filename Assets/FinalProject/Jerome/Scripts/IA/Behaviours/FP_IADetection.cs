@@ -10,7 +10,7 @@ public class FP_IADetection : MonoBehaviour
     public event Action OnUpdateDetection = null;
     public event Action<ITarget> OnTargetDetected = null;
     public event Action<Vector3> OnTargetLost = null;
-    public event Action<FP_ObstacleTest> OnCoverDetected = null;
+    public event Action<FP_Obstacle> OnCoverDetected = null;
 
     [SerializeField,Range(0,100)] float maxDistance = 10;
     [SerializeField, Range(0, 180)] int angle = 90;
