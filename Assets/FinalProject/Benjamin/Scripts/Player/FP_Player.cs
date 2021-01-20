@@ -19,7 +19,7 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 
 
 	[Header("Parameters")]
-	[SerializeField] string walkParameter = "Is_Walk", shootParameter= "shoot", reloadParameter= "reload";
+	[SerializeField] string deadParameter = "dead", shootParameter= "shoot", reloadParameter= "reload";
 
 	public int ID => id;
 	public bool IsValid => mecanim && movement && shooter;
@@ -81,17 +81,16 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 
 
 		shooter.OnShoot += () =>
-		{
-			mecanim.SetBool(walkParameter, false);
+		{			
 			mecanim.SetBool(shootParameter, true);
-	
+			if (shooter.BulletsNumberMax == 0)
+				shooter.SetReload();
 		};
 
 		//à appeler quand que tu reload
 		shooter.OnReload += () =>
 		{
 			mecanim.SetBool(reloadParameter, true);
-			mecanim.SetBool(walkParameter, false);
 			mecanim.SetBool(shootParameter, false);
 		};
 	}

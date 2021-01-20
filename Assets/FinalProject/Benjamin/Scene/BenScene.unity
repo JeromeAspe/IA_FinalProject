@@ -1751,10 +1751,40 @@ PrefabInstance:
       propertyPath: bulletsNumberMax
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3045354047359927248, guid: 4117f3a6d42e17f4b90ac02d9dbcfb65,
+        type: 3}
+      propertyPath: shootSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8581f806dddef8046b4942de05b897be, type: 3}
+    - target: {fileID: 3045354047359927248, guid: 4117f3a6d42e17f4b90ac02d9dbcfb65,
+        type: 3}
+      propertyPath: reloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 406c929b7299afb469c82778f8d15d5b, type: 3}
     - target: {fileID: 3045354047359927249, guid: 4117f3a6d42e17f4b90ac02d9dbcfb65,
         type: 3}
       propertyPath: id
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3045354047359927249, guid: 4117f3a6d42e17f4b90ac02d9dbcfb65,
+        type: 3}
+      propertyPath: movement
+      value: 
+      objectReference: {fileID: 3045354048878872688}
+    - target: {fileID: 3045354047359927249, guid: 4117f3a6d42e17f4b90ac02d9dbcfb65,
+        type: 3}
+      propertyPath: mecanim
+      value: 
+      objectReference: {fileID: 3045354048878872687}
+    - target: {fileID: 3045354047359927249, guid: 4117f3a6d42e17f4b90ac02d9dbcfb65,
+        type: 3}
+      propertyPath: shootParameter
+      value: shoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 3045354047359927249, guid: 4117f3a6d42e17f4b90ac02d9dbcfb65,
+        type: 3}
+      propertyPath: reloadParameter
+      value: reload
       objectReference: {fileID: 0}
     - target: {fileID: 3045354047359927254, guid: 4117f3a6d42e17f4b90ac02d9dbcfb65,
         type: 3}
@@ -2078,3 +2108,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4117f3a6d42e17f4b90ac02d9dbcfb65, type: 3}
+--- !u!1 &3045354048878872686 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3045354047359927255, guid: 4117f3a6d42e17f4b90ac02d9dbcfb65,
+    type: 3}
+  m_PrefabInstance: {fileID: 3045354048878872685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3045354048878872687
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3045354048878872686}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: e6360b41e77d19f45b3d2cf31d3732f3, type: 3}
+  m_Controller: {fileID: 9100000, guid: b00ba3038713748419cb72564b4a5cb2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3045354048878872688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3045354048878872686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34693e875eac2cb4db67d9cf693410bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mecanim: {fileID: 3045354048878872687}
+  clampYRotation: 40
+  movementSpeed: 5
+  rotateSpeed: 100
+  horizontalParam: Horizontal
+  verticalParam: Vertical
+  shootParam: shoot
+--- !u!81 &3045354048878872689
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3045354048878872686}
+  m_Enabled: 1
