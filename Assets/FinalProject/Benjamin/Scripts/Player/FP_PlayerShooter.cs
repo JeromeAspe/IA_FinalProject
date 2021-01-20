@@ -91,9 +91,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 
     void Init()
     {
-        //currentBulletsNumber = bulletsNumberMax;
-
-        //OnShoot += () => SetReload();
+       
         OnReload += () =>
         {
            

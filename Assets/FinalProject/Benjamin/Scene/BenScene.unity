@@ -1564,6 +1564,11 @@ PrefabInstance:
       propertyPath: shootHitFX
       value: 
       objectReference: {fileID: 1329932664}
+    - target: {fileID: 3045354047359927248, guid: 4117f3a6d42e17f4b90ac02d9dbcfb65,
+        type: 3}
+      propertyPath: reloadTimeValue
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3045354047359927249, guid: 4117f3a6d42e17f4b90ac02d9dbcfb65,
         type: 3}
       propertyPath: respawnPoint
