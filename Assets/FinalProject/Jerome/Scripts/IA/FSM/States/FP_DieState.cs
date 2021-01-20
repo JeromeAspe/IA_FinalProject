@@ -32,7 +32,6 @@ public class FP_DieState : FP_State
         };
         OnExit += () =>
         {
-            Debug.Log("exit");
             _brain.Animations.SetDieAnimation(false);
             canExit = false;
             

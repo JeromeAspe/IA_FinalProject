@@ -16,8 +16,7 @@ public class FP_ResetState : FP_State
             _brain.FSM.SetBool(_brain.AttackParameter, false);
             _brain.FSM.SetBool(_brain.ResetParameter, false);
             _brain.FSM.SetBool(_brain.DieParameter, false);
-            
-            Debug.Log("exit reset");
+            _brain.IaPlayer.Respawn();
 
         };
         OnExit += () =>

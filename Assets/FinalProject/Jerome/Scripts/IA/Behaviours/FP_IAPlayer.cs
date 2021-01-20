@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class FP_IAPlayer : FP_PlayerBehaviour
 {
+    [SerializeField] Vector3 respawn = Vector3.zero;
     [SerializeField,Range(1,100)] float wondedPercentageCover = 60;
     public event Action OnWounded = null;
 
@@ -15,5 +16,15 @@ public class FP_IAPlayer : FP_PlayerBehaviour
         if (IsWounded)
             OnWounded?.Invoke();
         
+    }
+    public void Respawn()
+    {
+        transform.position = respawn;
+    }
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(respawn, Vector3.one);
     }
 }
