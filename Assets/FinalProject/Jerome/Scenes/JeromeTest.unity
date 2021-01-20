@@ -1058,7 +1058,7 @@ MonoBehaviour:
   shootDistance: 10
   reloadTimeValue: 1
   fireRate: 1
-  bulletsMax: 2
+  bulletsMax: 20
   currentBulletNB: 20
   damage: 2
   canShoot: 1
