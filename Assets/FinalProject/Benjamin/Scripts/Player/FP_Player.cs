@@ -81,8 +81,9 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 
 
 		shooter.OnShoot += () =>
-		{			
-			mecanim.SetBool(shootParameter, true);
+		{
+			mecanim.SetTrigger(shootParameter);
+			//mecanim.SetBool(shootParameter, true);
 			if (shooter.BulletsNumberMax == 0)
 				shooter.SetReload();
 		};
@@ -90,8 +91,9 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 		//à appeler quand que tu reload
 		shooter.OnReload += () =>
 		{
-			mecanim.SetBool(reloadParameter, true);
-			mecanim.SetBool(shootParameter, false);
+			//mecanim.SetBool(reloadParameter, true);
+			mecanim.SetTrigger(reloadParameter);
+			//mecanim.SetBool(shootParameter, false);
 		};
 	}
 

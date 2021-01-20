@@ -8,9 +8,9 @@ public class FP_CameraSettings
     [SerializeField, Header("Camera Movements Speed"), Range(0, 200)] float cameraMovementsSpeed = 5;
     [SerializeField, Header("Camera Rotation Speed"), Range(0, 200)] float cameraRotationSpeed = 10;
 
-    [SerializeField, Header("X Offset"), Range(-20, 20)] float xOffset = 0;
-    [SerializeField, Header("Y Offset"), Range(-20, 20)] float yOffset = 1.5f;
-    [SerializeField, Header("Z Offset"), Range(-20, 20)] float zOffset = 0;
+    [SerializeField, Header("X Offset"), Range(-20, 20)] float xOffset = -0.4f;
+    [SerializeField, Header("Y Offset"), Range(-20, 20)] float yOffset = 1.43f;
+    [SerializeField, Header("Z Offset"), Range(-20, 20)] float zOffset = -0.2f;
 
     public Transform Target => target;
     public Vector3 TargetPosition
@@ -43,9 +43,10 @@ public class FP_CameraSettings
         switch(_type)
         {
             case ECameraType.FPS:
-                yOffset = target.up.y + 0.5f;
-                zOffset = target.forward.z * 0;
-                
+                xOffset = -0.4f;
+                yOffset = 1.43f;
+                zOffset = -0.2f;
+
                 break;
             default: 
                 break;
