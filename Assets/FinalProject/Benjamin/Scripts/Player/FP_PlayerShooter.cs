@@ -95,7 +95,6 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
         OnReload += () =>
         {
             bulletsNumberMax += 10;
-            Debug.Log($"{currentBulletsNumber} / {bulletsNumberMax}");
             SetReload();
             InstantiateSound(reloadSound, weapon.transform.position, 2);
             FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
