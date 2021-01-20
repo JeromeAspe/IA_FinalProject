@@ -16,7 +16,8 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
     [SerializeField, Range(0, 15)] float reloadTimeValue = 5;
     [SerializeField, Range(0, 10)] float fireRate = 2;
     [SerializeField, Range(0, 10)] int bulletsNumberMax = 5;
-
+    [SerializeField] FP_IAPlayer enemy = null;
+    [SerializeField, Range(0,100)] int damage = 3;
     // FX
     [SerializeField, Range(0, 10)] float durationFx = .5f;
     [SerializeField] GameObject shootFX = null;
@@ -141,6 +142,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
             bool _fireHit = Physics.Raycast(weapon.transform.position, ShootPointWithDistance, out RaycastHit _hit, shootDistance, aiMask);
             if (!_fireHit) return;
             lastHitPoint = _hit.point;
+            enemy.Life -= damage;
             Debug.Log("touché l'ennemi");
             OnShootHit?.Invoke();
 
