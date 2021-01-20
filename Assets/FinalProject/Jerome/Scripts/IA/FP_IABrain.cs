@@ -205,11 +205,14 @@ public class FP_IABrain : MonoBehaviour
     
     private void Update()
     {
+        Debug.Log(IsEnabled);
+        if (!IsEnabled) return;
         fightSystem.UpdateShootState();
     }
     public void ResetStates()
     {
+        Debug.Log("oui");
         fsm.SetBool(resetParameter, true);
-        IsEnabled = true;
+        //IsEnabled = true;
     }
 }

@@ -9,14 +9,20 @@ public class FP_ResetState : FP_State
         base.InitState(_brain);
         OnEnter += () =>
         {
-           
+            _brain.IaPlayer.AddLife(1000);
             _brain.FSM.SetBool(_brain.PatrolParameter, true);
             _brain.FSM.SetBool(_brain.WaitParameter, false);
             _brain.FSM.SetBool(_brain.ChaseParameter, false);
             _brain.FSM.SetBool(_brain.AttackParameter, false);
             _brain.FSM.SetBool(_brain.ResetParameter, false);
             _brain.FSM.SetBool(_brain.DieParameter, false);
-            _brain.IaPlayer.AddLife(1000);
+            
+            Debug.Log("exit reset");
+
+        };
+        OnExit += () =>
+        {
+            _brain.IsEnabled = true;
         };
 
         
