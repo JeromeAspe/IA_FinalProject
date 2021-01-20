@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2797878398574259483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2797878398574259481}
+  - component: {fileID: 2797878398574259480}
+  - component: {fileID: 2797878398574259478}
+  - component: {fileID: 2797878398574259479}
+  - component: {fileID: 2797878398574259476}
+  m_Layer: 0
+  m_Name: Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2797878398574259481
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797878398574259483}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -0.33}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2797878398574259480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797878398574259483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcfea669435b7c948a927f35bb69f14f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualDebugHeight: 3
+  visualDebugSize: 0.3
+  validColor: {r: 0, g: 1, b: 0, a: 1}
+  isDebugActive: 1
+  visualDebugColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &2797878398574259478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797878398574259483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a37c99c9ab38bd44283e2059000724df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualDebugHeight: 3.8
+  visualDebugSize: 0.1
+  validColor: {r: 1, g: 0, b: 0.87176275, a: 1}
+--- !u!114 &2797878398574259479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797878398574259483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ed75a984dc30747a539337c72ce1eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualDebugHeight: 0
+  visualDebugSize: 0.3
+  validColor: {r: 0, g: 1, b: 0, a: 1}
+  axis:
+  - axisName: Joystick Horizontal
+    axisValue: 0
+    action: 3
+    invertAxis: 0
+  - axisName: Joystick Vertical
+    axisValue: 0
+    action: 4
+    invertAxis: 0
+  - axisName: Horizontal
+    axisValue: 0
+    action: 1
+    invertAxis: 0
+  - axisName: Vertical
+    axisValue: 0
+    action: 2
+    invertAxis: 0
+  - axisName: Mouse X
+    axisValue: 0
+    action: 5
+    invertAxis: 0
+  - axisName: Mouse Y
+    axisValue: 0
+    action: 6
+    invertAxis: 0
+  buttons:
+  - buttonKeyCode: 330
+    buttonState: 0
+    buttonAction: 3
+    buttonValue: 0
+  - buttonKeyCode: 323
+    buttonState: 0
+    buttonAction: 3
+    buttonValue: 0
+  - buttonKeyCode: 114
+    buttonState: 0
+    buttonAction: 4
+    buttonValue: 0
+  - buttonKeyCode: 331
+    buttonState: 0
+    buttonAction: 4
+    buttonValue: 0
+--- !u!114 &2797878398574259476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797878398574259483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b7185077844ec34ea083ba292f7625e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualDebugHeight: 0
+  visualDebugSize: 0.3
+  validColor: {r: 0, g: 1, b: 0, a: 1}
+  playerHealthSlider: {fileID: 0}
+  playerHealthFillImageSlider: {fileID: 0}
+  weaponCapacityText: {fileID: 0}
+  weaponCapacityImage: {fileID: 0}
+  settingsButton: {fileID: 0}
+  playerHeadImage: {fileID: 0}
