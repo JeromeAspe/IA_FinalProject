@@ -250,7 +250,7 @@ MonoBehaviour:
   damage: 10
   isEnable: 1
   cameraType: 0
-  fsm: {fileID: 0}
+  mecanim: {fileID: 0}
   movement: {fileID: 0}
   shooter: {fileID: 0}
   playerCameraSettings:
@@ -645,8 +645,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe2f475bbf75d84e91451b34d7e7d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1875733994}
+  target: {x: 0, y: 0, z: 0}
   covers: []
+  id: 0
 --- !u!1 &626788767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1794,8 +1795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9d4de692b448140b6355c6812c3845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _test: {fileID: 532240097}
-  _test2: {fileID: 532240097}
+  target: {x: 0, y: 0, z: 0}
 --- !u!1 &1875733990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1900,10 +1900,20 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1616094324669788952, guid: ea014a4892d83c141ac7e498fe2f65e9,
+        type: 3}
+      propertyPath: isAtPosDistance
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 1616094324669788955, guid: ea014a4892d83c141ac7e498fe2f65e9,
         type: 3}
       propertyPath: wondedPercentageCover
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616094324669788955, guid: ea014a4892d83c141ac7e498fe2f65e9,
+        type: 3}
+      propertyPath: life
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1616094324669788956, guid: ea014a4892d83c141ac7e498fe2f65e9,
         type: 3}
@@ -1915,6 +1925,11 @@ PrefabInstance:
       propertyPath: coverDetection
       value: 
       objectReference: {fileID: 349018921}
+    - target: {fileID: 1616094324669788958, guid: ea014a4892d83c141ac7e498fe2f65e9,
+        type: 3}
+      propertyPath: coverBehaviour
+      value: 
+      objectReference: {fileID: 1807437692}
     - target: {fileID: 1616094324669788959, guid: ea014a4892d83c141ac7e498fe2f65e9,
         type: 3}
       propertyPath: m_LocalPosition.x

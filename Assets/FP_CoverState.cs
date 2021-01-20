@@ -9,7 +9,7 @@ public class FP_CoverState : FP_State
         base.InitState(_brain);
         OnEnter += () =>
         {
-            _brain.Movement.SetMoveTarget(new Vector3(-10, 0, -10));
+            _brain.Movement.SetMoveTarget(_brain.CoverBehaviour.GetBestCover());
             _brain.Movement.SetStateNav(true);
             
         };

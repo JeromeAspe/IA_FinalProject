@@ -14,7 +14,7 @@ public class FP_IABrain : MonoBehaviour
     [SerializeField] FP_SearchBehaviour chase = null;
     [SerializeField] FP_IAStats stats = new FP_IAStats();
     [SerializeField] FP_IAAnimations animations = null;
-    [SerializeField] FP_CoverDetection coverDetection = null;
+    [SerializeField] FP_CoverBehaviour coverBehaviour = null;
 
 
 
@@ -44,8 +44,8 @@ public class FP_IABrain : MonoBehaviour
     public FP_SearchBehaviour Chase => chase;
     public FP_IAStats Stats => stats;
     public FP_IAAnimations Animations => animations;
-    public FP_CoverDetection CoverDetection => coverDetection;
-    public bool IsValid => fsm && iaPlayer && movement && detection && fightSystem && chase && animations && coverDetection;
+    public FP_CoverBehaviour CoverBehaviour => coverBehaviour;
+    public bool IsValid => fsm && iaPlayer && movement && detection && fightSystem && chase && animations && coverBehaviour;
 
     protected virtual void Start()
     {
@@ -128,6 +128,7 @@ public class FP_IABrain : MonoBehaviour
         {
             if (!_target.IsDead)
             {
+                coverBehaviour.SetTarget(_target.TargetPosition);
                 fsm.SetBool(attackParameter, true);
                 fightSystem.SetTarget(_target);
             }
@@ -169,6 +170,10 @@ public class FP_IABrain : MonoBehaviour
         {
             fsm.SetBool(coverParameter, true);
             fsm.SetBool(patrolParameter, false);
+        };
+        detection.OnCoverDetected += (_cover) =>
+        {
+            coverBehaviour.Add(_cover);
         };
 
         

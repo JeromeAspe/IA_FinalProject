@@ -5,11 +5,14 @@ using UnityEngine;
 public class FP_CoverBehaviour : MonoBehaviour
 {
     Dictionary<int, FP_Obstacle> covers = new Dictionary<int, FP_Obstacle>();
+    [SerializeField] Vector3 target = Vector3.zero;
 
 
-
-
-
+    private void Update()
+    {
+        Debug.Log(covers.Count);
+    }
+    public void SetTarget(Vector3 _target) => target = _target;
     public void Add(FP_Obstacle _obstacle)
     {
         if (Exists(_obstacle.ID)) return;
@@ -23,7 +26,7 @@ public class FP_CoverBehaviour : MonoBehaviour
     {
         return covers.Count != 0;
     }
-    public Vector3 GetBestCover(Vector3 _target)
+    public Vector3 GetBestCover()
     {
         float _minDistance = int.MaxValue;
         FP_Obstacle _cover = null;
@@ -36,6 +39,7 @@ public class FP_CoverBehaviour : MonoBehaviour
                 _cover = _obstacle.Value;
             }
         }
+        _cover.SetTarget(target);
         return _cover.GetBestCoverSide().transform.position;
     }
 }
