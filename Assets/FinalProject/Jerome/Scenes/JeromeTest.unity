@@ -949,7 +949,7 @@ MonoBehaviour:
     objectiveAttempts: 0
     totalRewards: 0
     totalFails: 0
-    attemptPercentReset: 5
+    attemptPercentReset: 20
     globalProgress: 0
     currentFailProgress: 0
   animations: {fileID: 931956683}
