@@ -20,7 +20,8 @@ public class FP_IABrain : MonoBehaviour
     string patrolParameter = "patrol";
     string attackParameter = "attack";
     string chaseParameter = "chase";
-    string resetParameter = "chase";
+    string resetParameter = "reset";
+    string dieParameter = "die";
 
     bool HasKilled = false;
 
@@ -29,6 +30,7 @@ public class FP_IABrain : MonoBehaviour
     public string AttackParameter => attackParameter;
     public string ChaseParameter => chaseParameter;
     public string ResetParameter => resetParameter;
+    public string DieParameter => dieParameter;
     public Animator FSM => fsm;
     public FP_IAPlayer IaPlayer => iaPlayer;
     public FP_IAMovement Movement => movement;
@@ -64,6 +66,7 @@ public class FP_IABrain : MonoBehaviour
         InitMovements();
         InitDetection();
         InitFight();
+        InitPlayerIA();
     }
     protected virtual void InitMovements()
     {
@@ -128,6 +131,13 @@ public class FP_IABrain : MonoBehaviour
         };
 
     }
+    public void InitPlayerIA()
+    {
+        iaPlayer.OnDie += () =>
+        {
+            fsm.SetBool(dieParameter, true);
+        };
+    }
     
     private void Update()
     {
@@ -136,9 +146,5 @@ public class FP_IABrain : MonoBehaviour
     public void ResetStates()
     {
         fsm.SetBool(resetParameter, true);
-        fsm.SetBool(PatrolParameter, true);
-        fsm.SetBool(waitParameter, false);
-        fsm.SetBool(chaseParameter, false);
-        fsm.SetBool(attackParameter, false);
     }
 }
