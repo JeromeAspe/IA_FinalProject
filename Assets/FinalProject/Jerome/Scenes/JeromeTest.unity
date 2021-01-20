@@ -285,7 +285,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1616094325030728925}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 731ead05767f93c44a3dcdbd4c894740, type: 3}
   m_Name: 
@@ -810,7 +810,7 @@ GameObject:
   - component: {fileID: 899094289}
   - component: {fileID: 899094288}
   - component: {fileID: 899094287}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1876,6 +1876,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 349018921, guid: ea014a4892d83c141ac7e498fe2f65e9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1616094324669788955, guid: ea014a4892d83c141ac7e498fe2f65e9,
         type: 3}
       propertyPath: wondedPercentageCover

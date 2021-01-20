@@ -17,7 +17,7 @@ public class FP_IADetection : MonoBehaviour
 
     FP_IADetectionData[] rays = null;
     [SerializeField] LayerMask playerLayer = 0, obstacleLayer = 0;
-
+    [SerializeField] float startPosOffset = 0;
     ITarget lastTarget = null;
 
     private void Start()
@@ -36,7 +36,7 @@ public class FP_IADetection : MonoBehaviour
             OnUpdateDebug+= _data.DrawDetectionRay;
             OnUpdateDetection += () =>
             {
-                _data.Detection(playerLayer, obstacleLayer);
+                _data.Detection(playerLayer, obstacleLayer,startPosOffset-1);
                 CheckDetection();
             };
             index++;
@@ -61,10 +61,12 @@ public class FP_IADetection : MonoBehaviour
     void UpdateDetection()
     {
         OnUpdateDetection?.Invoke();
+        
     }
     void UpdateDebug()
     {
         OnUpdateDebug?.Invoke();
+        startPosOffset = Mathf.PingPong(Time.time, 1);
     }
     private void Update()
     {

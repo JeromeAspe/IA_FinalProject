@@ -14,7 +14,7 @@ public class FP_IADetectionData
 
     public ITarget Target => target;
     public bool TargetDetected { get; set; } = false;
-
+    public Vector3 StartPosition { get; set; } = Vector3.zero;
 
     public FP_IADetectionData(int _angle,float _maxDistance,Transform _originTransform)
     {
@@ -23,14 +23,15 @@ public class FP_IADetectionData
         originTransform = _originTransform;
     }
 
-    public void Detection(LayerMask _playerMask,LayerMask _obstacleMask)
+    public void Detection(LayerMask _playerMask,LayerMask _obstacleMask,float _offset)
     {
-        isObstacle = Physics.Raycast(originTransform.position, GetDirectionRay(), out RaycastHit _hitObstacle, maxDistance, _obstacleMask);
+        StartPosition = originTransform.position + Vector3.up * _offset;
+        isObstacle = Physics.Raycast(originTransform.position+Vector3.up*_offset, GetDirectionRay(), out RaycastHit _hitObstacle, maxDistance, _obstacleMask);
         if(isObstacle)
         {
             currentDistance = _hitObstacle.distance;
         }
-        bool _isPlayer = Physics.Raycast(originTransform.position, GetDirectionRay(), out RaycastHit _hitPlayer, GetLength(), _playerMask);
+        bool _isPlayer = Physics.Raycast(originTransform.position + Vector3.up * _offset, GetDirectionRay(), out RaycastHit _hitPlayer, GetLength(), _playerMask);
         ITarget _target =  _hitPlayer.collider?.GetComponentInParent<ITarget>();
         TargetDetected = _target != null && !_target.IsDead;
         target = _target;
@@ -47,6 +48,6 @@ public class FP_IADetectionData
 
     public void DrawDetectionRay()
     {
-        Debug.DrawRay(originTransform.position, GetDirectionRay() * GetLength(),Color.green);
+        Debug.DrawRay(StartPosition, GetDirectionRay() * GetLength(),Color.green);
     }
 }
