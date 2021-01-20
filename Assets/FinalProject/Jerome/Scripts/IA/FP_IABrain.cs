@@ -163,8 +163,13 @@ public class FP_IABrain : MonoBehaviour
          {
              animations.SetWalkAnimation(_bool);
              animations.SetShootAnimation(false);
+             animations.SetAimAnimation(false);
          };
         fightSystem.OnAttack += () =>
+        {
+            animations.SetAimAnimation(true);
+        };
+        fightSystem.OnShoot += () =>
         {
             animations.SetShootAnimation(true);
         };

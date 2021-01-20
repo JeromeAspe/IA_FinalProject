@@ -29,10 +29,7 @@ public class FP_FightSystem : MonoBehaviour, IShooter
     {
         currentBulletNB = bulletsMax;
         
-        OnShoot += () =>
-        {
-            Shoot(true);
-        };
+
         OnReload += () => Reload();
         OnAttack += () => Shoot(true);
     }
@@ -70,6 +67,7 @@ public class FP_FightSystem : MonoBehaviour, IShooter
             OnReload?.Invoke();
             return;
         }
+        OnShoot?.Invoke();
         target.SetDamage(damage);
         currentBulletNB--;
         canShoot = false;
