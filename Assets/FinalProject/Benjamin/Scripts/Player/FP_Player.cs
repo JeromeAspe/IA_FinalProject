@@ -14,12 +14,12 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 	[Header("Scripts")]
 	[SerializeField] Animator mecanim = null;
 	[SerializeField] FP_PlayerRootMovements movement = null;
-	[SerializeField] FP_PlayerShooter shooter= null;
+	[SerializeField] FP_PlayerShooter shooter = null;
 	[SerializeField] FP_CameraSettings playerCameraSettings = new FP_CameraSettings();
-
+	[SerializeField] Transform respawnPoint = null;
 
 	[Header("Parameters")]
-	[SerializeField] string deadParameter = "dead", shootParameter= "shoot", reloadParameter= "reload";
+	[SerializeField] string respawnParameter = "respawn", deadParameter = "dead", shootParameter = "shoot", reloadParameter = "reload";
 
 	public int ID => id;
 	public bool IsValid => mecanim && movement && shooter;
@@ -50,7 +50,7 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 	{
 		base.OnDestroy();
 		RemoveHandledItem();
-		
+
 	}
 
 	public void Enable()
@@ -76,8 +76,23 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 		//movement.OnMove += () =>
 		//{
 		//	mecanim.SetBool(walkParameter, true);
-			
+
 		//};
+
+		Debug.Log($"out : {IsDead}");
+
+
+		OnDie += () =>
+		{
+			Debug.Log($"in: {IsDead}");
+			mecanim.SetTrigger(deadParameter);
+			mecanim.SetBool(respawnParameter, true);
+			life += maxLife;
+			if (IsDead)
+				transform.position = respawnPoint.position;
+			//StartCoroutine(Dead());
+			
+		};
 
 
 		shooter.OnShoot += () =>
@@ -95,6 +110,23 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 			mecanim.SetTrigger(reloadParameter);
 			//mecanim.SetBool(shootParameter, false);
 		};
+	}
+
+	IEnumerator Dead()
+	{
+		
+		mecanim.SetTrigger(deadParameter);
+		transform.position = respawnPoint.position;
+		yield return Respawn();
+	}
+
+	IEnumerator Respawn()
+	{
+		
+		mecanim.SetBool(respawnParameter, true);
+		transform.position = respawnPoint.position;
+		life += 100;
+		yield return new WaitForSeconds(10);
 	}
 
 	void InitShootInput()

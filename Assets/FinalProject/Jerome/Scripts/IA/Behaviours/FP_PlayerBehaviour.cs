@@ -33,6 +33,7 @@ public abstract class FP_PlayerBehaviour : MonoBehaviour,ITarget
             if (life <= 0)
             {
                 OnDie?.Invoke();
+               
             }
 
         }

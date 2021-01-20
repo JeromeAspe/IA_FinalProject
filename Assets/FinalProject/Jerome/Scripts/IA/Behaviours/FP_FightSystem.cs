@@ -93,7 +93,6 @@ public class FP_FightSystem : MonoBehaviour, IShooter
     public void Reload()
     {
         if (!IsValid) return;
-        Debug.Log("d");
         currentBulletNB = bulletsMax;
     }
     private void OnDestroy()
