@@ -26,12 +26,14 @@ public class FP_IAMovement : MonoBehaviour
         {
             agent.speed = 0;
             agent.angularSpeed = 0;
+            
         }
         else
         {
             agent.speed = moveSpeed;
             agent.angularSpeed = rotateSpeed;
         }
+        OnMove?.Invoke(_state);
 
 
     }

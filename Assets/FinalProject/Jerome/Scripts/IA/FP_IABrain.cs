@@ -13,6 +13,7 @@ public class FP_IABrain : MonoBehaviour
     [SerializeField] FP_FightSystem fightSystem = null;
     [SerializeField] FP_SearchBehaviour chase = null;
     [SerializeField] FP_IAStats stats = new FP_IAStats();
+    [SerializeField] FP_IAAnimations animations = null;
     
 
 
@@ -39,6 +40,7 @@ public class FP_IABrain : MonoBehaviour
     public FP_FightSystem FightSystem => fightSystem;
     public FP_SearchBehaviour Chase => chase;
     public FP_IAStats Stats => stats;
+    public FP_IAAnimations Animations => animations;
     public bool IsValid => fsm && iaPlayer && movement && detection && fightSystem && chase;
 
     protected virtual void Start()
@@ -67,6 +69,7 @@ public class FP_IABrain : MonoBehaviour
         InitDetection();
         InitFight();
         InitPlayerIA();
+        InitAnimations();
     }
     protected virtual void InitMovements()
     {
@@ -136,6 +139,19 @@ public class FP_IABrain : MonoBehaviour
         iaPlayer.OnDie += () =>
         {
             fsm.SetBool(dieParameter, true);
+        };
+    }
+
+    public void InitAnimations()
+    {
+        movement.OnMove += (_bool) =>
+         {
+             animations.SetWalkAnimation(_bool);
+             animations.SetShootAnimation(false);
+         };
+        fightSystem.OnAttack += () =>
+        {
+            animations.SetShootAnimation(true);
         };
     }
     

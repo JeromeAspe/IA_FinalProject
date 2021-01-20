@@ -9,6 +9,7 @@ public class FP_PatrolState : FP_State
         base.InitState(_brain);
         OnEnter += () =>
         {
+            _brain.Movement.SetStateNav(true);
             Vector3 _nextPoint = _brain.Patrol.GetNextPoint();
             _brain.Movement.SetMoveTarget(_nextPoint);
             

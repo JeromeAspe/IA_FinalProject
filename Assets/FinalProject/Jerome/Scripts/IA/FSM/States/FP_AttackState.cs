@@ -20,6 +20,7 @@ public class FP_AttackState : FP_State
         };
         OnExit += () =>
         {
+            _brain.Animations.SetShootAnimation(false);
             _brain.Movement.SetStateNav(true);
         };
     }
