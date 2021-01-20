@@ -14,7 +14,8 @@ public class FP_IABrain : MonoBehaviour
     [SerializeField] FP_SearchBehaviour chase = null;
     [SerializeField] FP_IAStats stats = new FP_IAStats();
     [SerializeField] FP_IAAnimations animations = null;
-    
+    [SerializeField] FP_CoverDetection coverDetection = null;
+
 
 
     string waitParameter = "wait";
@@ -23,6 +24,7 @@ public class FP_IABrain : MonoBehaviour
     string chaseParameter = "chase";
     string resetParameter = "reset";
     string dieParameter = "die";
+    string coverParameter = "cover";
 
     bool HasKilled = false;
 
@@ -32,6 +34,7 @@ public class FP_IABrain : MonoBehaviour
     public string ChaseParameter => chaseParameter;
     public string ResetParameter => resetParameter;
     public string DieParameter => dieParameter;
+    public string CoverParameter => coverParameter;
     public Animator FSM => fsm;
     public FP_IAPlayer IaPlayer => iaPlayer;
     public FP_IAMovement Movement => movement;
@@ -41,7 +44,8 @@ public class FP_IABrain : MonoBehaviour
     public FP_SearchBehaviour Chase => chase;
     public FP_IAStats Stats => stats;
     public FP_IAAnimations Animations => animations;
-    public bool IsValid => fsm && iaPlayer && movement && detection && fightSystem && chase;
+    public FP_CoverDetection CoverDetection => coverDetection;
+    public bool IsValid => fsm && iaPlayer && movement && detection && fightSystem && chase && animations && coverDetection;
 
     protected virtual void Start()
     {
@@ -70,18 +74,22 @@ public class FP_IABrain : MonoBehaviour
         InitFight();
         InitPlayerIA();
         InitAnimations();
+        InitCoverDetection();
     }
     protected virtual void InitMovements()
     {
         Movement.OnTargetReached += () =>
         {
+            Debug.Log("reached");
             fsm.SetBool(waitParameter, true);
+            fsm.SetBool(coverParameter, false);
         };
         detection.OnTargetDetected += (_target) =>
         {
-            if (!_target.IsDead)
+            if (!_target.IsDead && !fsm.GetBool(CoverParameter))
             {
                 movement.SetMoveTarget(_target.TargetPosition);
+                fsm.SetBool(AttackParameter, true);
                 fsm.SetBool(PatrolParameter, false);
                 fsm.SetBool(waitParameter, false);
                 fsm.SetBool(chaseParameter, false);
@@ -102,7 +110,7 @@ public class FP_IABrain : MonoBehaviour
 
         detection.OnTargetLost += (_pos) =>
         {
-            if (HasKilled)
+            if (HasKilled || IaPlayer.IsWounded)
             {
                 HasKilled = false;
                 return;
@@ -153,6 +161,17 @@ public class FP_IABrain : MonoBehaviour
         {
             animations.SetShootAnimation(true);
         };
+    }
+    public void InitCoverDetection()
+    {
+
+        iaPlayer.OnWounded += () =>
+        {
+            fsm.SetBool(coverParameter, true);
+            fsm.SetBool(patrolParameter, false);
+        };
+
+        
     }
     
     private void Update()

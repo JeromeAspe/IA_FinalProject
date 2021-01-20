@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31714086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: -0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 155762483}
@@ -271,13 +271,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155762481}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.36, y: 0, z: 13.8}
+  m_LocalPosition: {x: 4.36, y: 0, z: 28.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 31714087}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &349018921 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 349018921, guid: ea014a4892d83c141ac7e498fe2f65e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1616094325030728925}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 731ead05767f93c44a3dcdbd4c894740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &378042566
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,7 +640,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532240092}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ad713c8d95f17d4b806d76f01a08144, type: 3}
   m_Name: 
@@ -1864,11 +1876,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1616094324669788955, guid: ea014a4892d83c141ac7e498fe2f65e9,
+        type: 3}
+      propertyPath: wondedPercentageCover
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 1616094324669788956, guid: ea014a4892d83c141ac7e498fe2f65e9,
         type: 3}
       propertyPath: m_Name
       value: IA
       objectReference: {fileID: 0}
+    - target: {fileID: 1616094324669788958, guid: ea014a4892d83c141ac7e498fe2f65e9,
+        type: 3}
+      propertyPath: coverDetection
+      value: 
+      objectReference: {fileID: 349018921}
     - target: {fileID: 1616094324669788959, guid: ea014a4892d83c141ac7e498fe2f65e9,
         type: 3}
       propertyPath: m_LocalPosition.x
