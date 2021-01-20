@@ -71,7 +71,7 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 		if(IsDead)
 		{
 			Debug.Log("toudoum");
-		transform.position = respawnPoint.position;
+			transform.position = respawnPoint.position;
 		}
 
 	}
@@ -123,12 +123,12 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 		mecanim.SetTrigger(deadParameter);
 		transform.position = respawnPoint.position;
 		yield return new WaitForSeconds(5);
+		Respawn();
 		yield return RespawnF();
 	}
 
 	IEnumerator RespawnF()
 	{
-		
 		mecanim.SetBool(respawnParameter, true);
 		transform.position = respawnPoint.position;
 		life += maxLife;
