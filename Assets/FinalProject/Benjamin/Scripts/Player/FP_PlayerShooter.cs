@@ -73,7 +73,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
     private void Start()
     {
         FP_InputManager.Instance?.RegisterButton(ButtonAction.Fire, Shoot);
-        FP_InputManager.Instance?.RegisterButton(ButtonAction.Reload, Reload);
+        FP_InputManager.Instance?.RegisterButton(ButtonAction.Reload,Reload);
         //OnReload?.Invoke();
     }
     void Update()
@@ -84,7 +84,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
     void OnDestroy()
     {
         FP_InputManager.Instance?.UnRegisterButton(ButtonAction.Fire, Shoot);
-        FP_InputManager.Instance?.UnRegisterButton(ButtonAction.Reload, Reload);
+        FP_InputManager.Instance?.UnRegisterButton(ButtonAction.Reload,Reload);
         Remove();
     }
 
@@ -154,11 +154,9 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
     public void Reload(bool _action)
     {
         if (!_action || !IsValid || !isReload) return;
-        if (bulletsNumberMax <= 0)
+        if (bulletsNumberMax >= 0)
         {
-            SetReload();
             OnReload?.Invoke();
-            bulletsNumberMax += currentBulletsNumber;//put a maxvalue
         }
     }
 

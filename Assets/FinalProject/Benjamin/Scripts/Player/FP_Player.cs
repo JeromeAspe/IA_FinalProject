@@ -61,7 +61,6 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 	public void InitHandledItem()
 	{
 		InitFSM();
-		InitShootInput();
 		InitCamera();
 		FP_PlayerManager.Instance?.Add(this);
 	}
@@ -135,11 +134,7 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 		yield return null;
 	}
 
-	void InitShootInput()
-	{
-		FP_InputManager.Instance?.RegisterButton(ButtonAction.Fire, (fire) => shooter.Shoot(fire));
-		FP_InputManager.Instance?.RegisterButton(ButtonAction.Reload, (reload) => shooter.Reload(reload));
-	}
+	
 	void InitCamera()
 	{
 		switch (cameraType)
