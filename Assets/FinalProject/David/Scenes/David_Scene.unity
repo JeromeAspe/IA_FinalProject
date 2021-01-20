@@ -550,7 +550,7 @@ MonoBehaviour:
     spaceCount: 1
     wordCount: 2
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -1328,6 +1328,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: swat
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e6360b41e77d19f45b3d2cf31d3732f3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: e6360b41e77d19f45b3d2cf31d3732f3,
         type: 3}
       propertyPath: m_Controller
@@ -1706,7 +1711,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1742933676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1953,6 +1958,7 @@ MonoBehaviour:
   damage: 10
   isEnable: 1
   cameraType: 1
+  die: 0
   mecanim: {fileID: 0}
   movement: {fileID: 0}
   shooter: {fileID: 0}
@@ -1963,6 +1969,8 @@ MonoBehaviour:
     xOffset: 0
     yOffset: 1.5
     zOffset: 0
+  respawnPoint: {fileID: 0}
+  respawnParameter: respawn
   deadParameter: dead
   shootParameter: Is_Shoot
   reloadParameter: Is_Reload

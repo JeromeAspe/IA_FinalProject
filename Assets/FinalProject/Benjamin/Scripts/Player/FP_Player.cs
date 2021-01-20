@@ -76,7 +76,7 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 		if(die)
 		{
 			Debug.Log("doit respawn");
-			transform.position = respawnPoint.position;
+		this.gameObject.transform.position = respawnPoint.position;
 		}
 
 	}
