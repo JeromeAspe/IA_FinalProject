@@ -50,7 +50,6 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 	{
 		base.OnDestroy();
 		RemoveHandledItem();
-
 	}
 
 	public void Enable()
@@ -67,7 +66,15 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 		FP_PlayerManager.Instance?.Add(this);
 	}
 
+	void Respawn()
+	{
+		if(IsDead)
+		{
+			Debug.Log("toudoum");
+		transform.position = respawnPoint.position;
+		}
 
+	}
 	void InitFSM()
 	{
 		if (!IsValid) return;
@@ -84,14 +91,10 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 
 		OnDie += () =>
 		{
-			Debug.Log($"in: {IsDead}");
-			mecanim.SetTrigger(deadParameter);
-			mecanim.SetBool(respawnParameter, true);
-			life += maxLife;
+			
+			StartCoroutine(Dead());
 			if (IsDead)
 				transform.position = respawnPoint.position;
-			//StartCoroutine(Dead());
-			
 		};
 
 
@@ -110,6 +113,8 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 			mecanim.SetTrigger(reloadParameter);
 			//mecanim.SetBool(shootParameter, false);
 		};
+
+		
 	}
 
 	IEnumerator Dead()
@@ -117,16 +122,17 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 		
 		mecanim.SetTrigger(deadParameter);
 		transform.position = respawnPoint.position;
-		yield return Respawn();
+		yield return new WaitForSeconds(5);
+		yield return RespawnF();
 	}
 
-	IEnumerator Respawn()
+	IEnumerator RespawnF()
 	{
 		
 		mecanim.SetBool(respawnParameter, true);
 		transform.position = respawnPoint.position;
-		life += 100;
-		yield return new WaitForSeconds(10);
+		life += maxLife;
+		yield return null;
 	}
 
 	void InitShootInput()
