@@ -96,7 +96,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
         //OnShoot += () => SetReload();
         OnReload += () =>
         {
-            bulletsNumberMax += 10;
+           
             SetReload();
             InstantiateSound(reloadSound, weapon.transform.position, 2);
             FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
@@ -158,6 +158,9 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
         if (bulletsNumberMax >= 0)
         {
             OnReload?.Invoke();
+            bulletsNumberMax += 10;
+            if (bulletsNumberMax > 10)
+                bulletsNumberMax = 10;
         }
     }
 
