@@ -9,7 +9,7 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 	[SerializeField, Range(0, 100)] int damage = 10;
 	[SerializeField] bool isEnable = true;
 	[SerializeField] ECameraType cameraType = ECameraType.None;
-
+	[SerializeField] bool die = false;
 
 	[Header("Scripts")]
 	[SerializeField] Animator mecanim = null;
@@ -31,7 +31,7 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 
 
 
-
+	public void SetDie() => die = IsDead;
 
 	public void SetID(int _id) => id = _id;
 	public void Disable()
@@ -46,6 +46,12 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 		OnLife += (life) => FP_UIManager.Instance?.UpdatePlayerHealthSlider(life);
 		OnLife?.Invoke(life);
 	}
+
+	private void Update()
+	{
+		Respawn();
+	}
+
 	protected override void OnDestroy()
 	{
 		base.OnDestroy();
@@ -67,9 +73,9 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 
 	void Respawn()
 	{
-		if(IsDead)
+		if(die)
 		{
-			Debug.Log("toudoum");
+			Debug.Log("doit respawn");
 			transform.position = respawnPoint.position;
 		}
 
@@ -78,42 +84,27 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 	{
 		if (!IsValid) return;
 
-		//à appeler que quand tu moves
-		//movement.OnMove += () =>
-		//{
-		//	mecanim.SetBool(walkParameter, true);
-
-		//};
-
-		Debug.Log($"out : {IsDead}");
-
+		Respawn();
 
 		OnDie += () =>
 		{
-			
 			StartCoroutine(Dead());
-			if (IsDead)
-				transform.position = respawnPoint.position;
 		};
 
 
 		shooter.OnShoot += () =>
 		{
+			
 			mecanim.SetTrigger(shootParameter);
-			//mecanim.SetBool(shootParameter, true);
 			if (shooter.BulletsNumberMax != shooter.CurrentBulletsNumber)
-			{
 				shooter.SetReload();
-			}
+			
 		};
 
 		//à appeler quand que tu reload
 		shooter.OnReload += () =>
 		{
-			//mecanim.SetBool(reloadParameter, true);
-			mecanim.SetTrigger(reloadParameter);
-			
-			//mecanim.SetBool(shootParameter, false);
+			mecanim.SetTrigger(reloadParameter);		
 		};
 
 		
@@ -121,7 +112,6 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 
 	IEnumerator Dead()
 	{
-		
 		mecanim.SetTrigger(deadParameter);
 		transform.position = respawnPoint.position;
 		yield return new WaitForSeconds(5);
