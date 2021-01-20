@@ -1865,6 +1865,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1616094324669788952, guid: ea014a4892d83c141ac7e498fe2f65e9,
+        type: 3}
+      propertyPath: moveTarget.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616094324669788955, guid: ea014a4892d83c141ac7e498fe2f65e9,
+        type: 3}
+      propertyPath: respawn.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616094324669788955, guid: ea014a4892d83c141ac7e498fe2f65e9,
+        type: 3}
+      propertyPath: respawn.z
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1616094324669788956, guid: ea014a4892d83c141ac7e498fe2f65e9,
         type: 3}
       propertyPath: m_Name
