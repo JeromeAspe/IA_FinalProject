@@ -140,6 +140,12 @@ public class FP_IABrain : MonoBehaviour
         detection.OnTargetLost += (_pos) =>
         {
             fsm.SetBool(attackParameter, false);
+            if (iaPlayer.IsWounded)
+            {
+                fsm.SetBool(coverParameter, true);
+                fsm.SetBool(patrolParameter, false);
+            }
+                
         };
 
     }
