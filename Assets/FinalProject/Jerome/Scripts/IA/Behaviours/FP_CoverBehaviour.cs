@@ -7,12 +7,17 @@ public class FP_CoverBehaviour : MonoBehaviour
     Dictionary<int, FP_Obstacle> covers = new Dictionary<int, FP_Obstacle>();
     [SerializeField] Vector3 target = Vector3.zero;
 
-
+    public bool HasTarget { get; set; } = false;
     private void Update()
     {
         Debug.Log(covers.Count);
     }
-    public void SetTarget(Vector3 _target) => target = _target;
+    public void SetTarget(Vector3 _target)
+    {
+        target = _target;
+        HasTarget = true;
+    }
+    public Vector3 GetTarget() => target;
     public void Add(FP_Obstacle _obstacle)
     {
         if (Exists(_obstacle.ID)) return;

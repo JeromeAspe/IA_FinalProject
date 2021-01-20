@@ -14,6 +14,7 @@ public class FP_IAMovement : MonoBehaviour
      float moveSpeed = 2;
     float rotateSpeed = 10;
     [SerializeField] NavMeshAgent agent = null;
+    float sens = 1;
 
     private void Start()
     {
@@ -53,6 +54,12 @@ public class FP_IAMovement : MonoBehaviour
         }
         
 
+    }
+    public void CheckBehind()
+    {
+        Vector3 _dir = new Vector3(-moveTarget.x, transform.position.y, -moveTarget.z);
+        Quaternion _angle = Quaternion.LookRotation(_dir);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, _angle, Time.deltaTime * rotateSpeed);
     }
     public void RotateTo()
     {
