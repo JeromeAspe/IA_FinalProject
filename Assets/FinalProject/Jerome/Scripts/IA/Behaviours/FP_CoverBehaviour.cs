@@ -44,6 +44,8 @@ public class FP_CoverBehaviour : MonoBehaviour
                 _cover = _obstacle.Value;
             }
         }
+        if (!_cover)
+            return transform.position;
         _cover.SetTarget(target);
         return _cover.GetBestCoverSide().transform.position;
     }

@@ -49,7 +49,6 @@ public class FP_PlayerRootMovements : MonoBehaviour
     }
     void UpdateRotation()
     {
-        Debug.Log(transform.eulerAngles.y + rotateHorizontal);
         transform.eulerAngles = new Vector3(GetClampedValue(rotateVertical, clampYRotation), transform.eulerAngles.y + rotateHorizontal, 0);
         
     }

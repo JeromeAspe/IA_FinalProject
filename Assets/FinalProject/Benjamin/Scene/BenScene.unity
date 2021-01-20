@@ -1969,6 +1969,11 @@ PrefabInstance:
       propertyPath: enemy
       value: 
       objectReference: {fileID: 487801931}
+    - target: {fileID: 3045354047359927248, guid: 4117f3a6d42e17f4b90ac02d9dbcfb65,
+        type: 3}
+      propertyPath: shootDistance
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3045354047359927249, guid: 4117f3a6d42e17f4b90ac02d9dbcfb65,
         type: 3}
       propertyPath: id
