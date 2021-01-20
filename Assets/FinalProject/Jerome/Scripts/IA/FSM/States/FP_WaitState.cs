@@ -15,6 +15,7 @@ public class FP_WaitState : FP_State
                  _brain.Movement.SetMoveTarget(_brain.CoverBehaviour.GetTarget()*-1);
              else
                  _brain.Movement.SetMoveTarget(_brain.transform.position);*/
+            _brain.Animations.SetWaitAnimation(true);
             _brain.Movement.SetMoveTarget(_brain.transform.position - _brain.transform.forward);
             _brain.Movement.SetStateNav(false);
             
@@ -27,6 +28,7 @@ public class FP_WaitState : FP_State
         {
             
             _brain.FSM.SetBool(_brain.WaitParameter, false);
+            _brain.Animations.SetWaitAnimation(false);
         };
     }
 
