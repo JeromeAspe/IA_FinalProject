@@ -60,8 +60,8 @@ public abstract class FP_PlayerBehaviour : MonoBehaviour,ITarget
 
     protected virtual void OnDrawGizmos()
     {
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.up * 2);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.up * 3);
         Gizmos.color = Color.Lerp(Color.red, Color.green, Life / maxLife);
-        Gizmos.DrawSphere(transform.position + Vector3.up * 2, .5f);
+        Gizmos.DrawSphere(transform.position + Vector3.up * 3, .3f);
     }
 }
