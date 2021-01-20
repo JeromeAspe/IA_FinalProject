@@ -11,7 +11,8 @@ public class FP_FightSystem : MonoBehaviour, IShooter
     public event Action OnReload = null;
 
     ITarget target = null;
-    
+    [SerializeField] Transform weaponCanon = null;
+    [SerializeField] GameObject fireEffect = null;
     [SerializeField,Range(0,100)] float shootDistance = 10;
     [SerializeField,Range(0,5)] float reloadTimeValue = 1;
     [SerializeField,Range(0,10)] float fireRate = 1;
@@ -32,6 +33,13 @@ public class FP_FightSystem : MonoBehaviour, IShooter
 
         OnReload += () => Reload();
         OnAttack += () => Shoot(true);
+        if (weaponCanon && fireEffect)
+        {
+            OnShoot += () =>
+            {
+                SpawnEffect(fireEffect,weaponCanon, 0.5f);
+            };
+        }
     }
 
    
@@ -72,7 +80,12 @@ public class FP_FightSystem : MonoBehaviour, IShooter
         currentBulletNB--;
         canShoot = false;
     }
-
+    public void SpawnEffect(GameObject _effect,Transform _pos,float _duration)
+    {
+        GameObject _object = Instantiate(_effect,_pos);
+        _object.transform.position = _pos.position;
+        Destroy(_object, _duration);
+    }
     public void UpdateShootState()
     {
         SetTimer();
