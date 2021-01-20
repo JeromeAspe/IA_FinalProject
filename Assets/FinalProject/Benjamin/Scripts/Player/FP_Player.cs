@@ -12,17 +12,17 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 
 
 	[Header("Scripts")]
-	[SerializeField] Animator fsm = null;
-	[SerializeField] FP_PlayerMovement movement = null;
+	[SerializeField] Animator mecanim = null;
+	[SerializeField] FP_PlayerRootMovements movement = null;
 	[SerializeField] FP_PlayerShooter shooter= null;
 	[SerializeField] FP_CameraSettings playerCameraSettings = new FP_CameraSettings();
 
 
 	[Header("Parameters")]
-	[SerializeField] string walkParameter = "Is_Walk", shootParameter= "Is_Shoot", reloadParameter= "Is_Reload";
+	[SerializeField] string walkParameter = "Is_Walk", shootParameter= "shoot", reloadParameter= "reload";
 
 	public int ID => id;
-	public bool IsValid => fsm && movement && shooter;
+	public bool IsValid => mecanim && movement && shooter;
 	public bool IsEnabled => isEnable;
 
 
@@ -73,26 +73,26 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 		if (!IsValid) return;
 
 		//à appeler que quand tu moves
-		movement.OnMove += () =>
-		{
-			fsm.SetBool(walkParameter, true);
+		//movement.OnMove += () =>
+		//{
+		//	mecanim.SetBool(walkParameter, true);
 			
-		};
+		//};
 
 
 		shooter.OnShoot += () =>
 		{
-			fsm.SetBool(walkParameter, false);
-			fsm.SetBool(shootParameter, true);
+			mecanim.SetBool(walkParameter, false);
+			mecanim.SetBool(shootParameter, true);
 	
 		};
 
 		//à appeler quand que tu reload
 		shooter.OnReload += () =>
 		{
-			fsm.SetBool(reloadParameter, true);
-			fsm.SetBool(walkParameter, false);
-			fsm.SetBool(shootParameter, false);
+			mecanim.SetBool(reloadParameter, true);
+			mecanim.SetBool(walkParameter, false);
+			mecanim.SetBool(shootParameter, false);
 		};
 	}
 

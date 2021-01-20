@@ -68,11 +68,18 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 
     private void Start()
     {
+		FP_InputManager.Instance?.RegisterButton(ButtonAction.Fire, Shoot);
+		FP_InputManager.Instance?.RegisterButton(ButtonAction.Reload, Reload);
 		//OnReload?.Invoke();
 	}
 	void Update()=>SetTimer();
 
-	void OnDestroy() => Remove();
+	void OnDestroy() 
+	{
+		FP_InputManager.Instance?.RegisterButton(ButtonAction.Fire, Shoot);
+		FP_InputManager.Instance?.RegisterButton(ButtonAction.Reload, Reload);
+		Remove();
+	}
 
 	void Init()
 	{
