@@ -10,6 +10,7 @@ public class FP_IADetection : MonoBehaviour
     public event Action OnUpdateDetection = null;
     public event Action<ITarget> OnTargetDetected = null;
     public event Action<Vector3> OnTargetLost = null;
+    public event Action<FP_ObstacleTest> OnCoverDetected = null;
 
     [SerializeField,Range(0,100)] float maxDistance = 10;
     [SerializeField, Range(0, 180)] int angle = 90;
@@ -24,6 +25,10 @@ public class FP_IADetection : MonoBehaviour
     {
         GenerateRays();
         InvokeRepeating("UpdateDetection", 0, detectionTickRate);
+        OnCoverDetected += (_a) =>
+        {
+            Debug.Log(_a.name);
+        };
     }
     void GenerateRays()
     {
@@ -45,6 +50,7 @@ public class FP_IADetection : MonoBehaviour
     void CheckDetection()
     {
         bool _playerDetected = rays.Any(_ray => _ray.TargetDetected);
+        bool _coverDetected = rays.Any(_ray => _ray.CoverDetected);
         if(!_playerDetected && lastTarget!=null)
         {
             OnTargetLost?.Invoke(lastTarget.TargetPosition);
@@ -55,6 +61,11 @@ public class FP_IADetection : MonoBehaviour
             FP_IADetectionData _data = rays.FirstOrDefault(_ray => _ray.TargetDetected);
             lastTarget = _data.Target;
             OnTargetDetected?.Invoke(_data.Target);
+        }
+        if (_coverDetected)
+        {
+            FP_IADetectionData _dataCover = rays.FirstOrDefault(_ray => _ray.CoverDetected);
+            OnCoverDetected?.Invoke(_dataCover.Cover);
         }
     }
 
