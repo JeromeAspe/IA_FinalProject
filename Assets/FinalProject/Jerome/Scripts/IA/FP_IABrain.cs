@@ -47,6 +47,7 @@ public class FP_IABrain : MonoBehaviour
     public FP_CoverBehaviour CoverBehaviour => coverBehaviour;
     public bool IsValid => fsm && iaPlayer && movement && detection && fightSystem && chase && animations && coverBehaviour;
 
+    public bool IsEnabled { get; set; } = true;
     protected virtual void Start()
     {
         Init();
@@ -80,14 +81,17 @@ public class FP_IABrain : MonoBehaviour
     {
         Movement.OnTargetReached += () =>
         {
+            if (!IsEnabled) return;
             Debug.Log("reached");
             fsm.SetBool(waitParameter, true);
             fsm.SetBool(coverParameter, false);
         };
         detection.OnTargetDetected += (_target) =>
         {
+            if (!IsEnabled) return;
             if (!_target.IsDead && !fsm.GetBool(CoverParameter))
             {
+
                 movement.SetMoveTarget(_target.TargetPosition);
                 fsm.SetBool(AttackParameter, true);
                 fsm.SetBool(PatrolParameter, false);
@@ -110,6 +114,7 @@ public class FP_IABrain : MonoBehaviour
 
         detection.OnTargetLost += (_pos) =>
         {
+            if (!IsEnabled) return;
             if (HasKilled || IaPlayer.IsWounded)
             {
                 HasKilled = false;
@@ -126,6 +131,7 @@ public class FP_IABrain : MonoBehaviour
     {
         detection.OnTargetDetected += (_target) =>
         {
+            if (!IsEnabled) return;
             if (!_target.IsDead)
             {
                 coverBehaviour.SetTarget(_target.TargetPosition);
@@ -139,6 +145,7 @@ public class FP_IABrain : MonoBehaviour
         };
         detection.OnTargetLost += (_pos) =>
         {
+            if (!IsEnabled) return;
             fsm.SetBool(attackParameter, false);
             if (iaPlayer.IsWounded)
             {
@@ -151,6 +158,7 @@ public class FP_IABrain : MonoBehaviour
     }
     public void InitPlayerIA()
     {
+        
         iaPlayer.OnDie += () =>
         {
             fsm.SetBool(dieParameter, true);
@@ -161,16 +169,19 @@ public class FP_IABrain : MonoBehaviour
     {
         movement.OnMove += (_bool) =>
          {
+             if (!IsEnabled) return;
              animations.SetWalkAnimation(_bool);
              animations.SetShootAnimation(false);
              animations.SetAimAnimation(false);
          };
         fightSystem.OnAttack += () =>
         {
+            if (!IsEnabled) return;
             animations.SetAimAnimation(true);
         };
         fightSystem.OnShoot += () =>
         {
+            if (!IsEnabled) return;
             animations.SetShootAnimation(true);
         };
     }
@@ -179,11 +190,13 @@ public class FP_IABrain : MonoBehaviour
 
         iaPlayer.OnWounded += () =>
         {
+            if (!IsEnabled) return;
             fsm.SetBool(coverParameter, true);
             fsm.SetBool(patrolParameter, false);
         };
         detection.OnCoverDetected += (_cover) =>
         {
+            if (!IsEnabled) return;
             coverBehaviour.Add(_cover);
         };
 
@@ -197,5 +210,6 @@ public class FP_IABrain : MonoBehaviour
     public void ResetStates()
     {
         fsm.SetBool(resetParameter, true);
+        IsEnabled = true;
     }
 }

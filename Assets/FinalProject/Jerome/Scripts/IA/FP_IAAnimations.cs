@@ -10,6 +10,7 @@ public class FP_IAAnimations : MonoBehaviour
     [SerializeField] string shootParameter = "shoot";
     [SerializeField] string aimParameter = "aim";
     [SerializeField] string waitParameter = "wait";
+    [SerializeField] string dieParameter = "die";
 
     public bool IsValid => mecanim;
 
@@ -34,5 +35,9 @@ public class FP_IAAnimations : MonoBehaviour
     public void SetWaitAnimation(bool _state)
     {
         mecanim.SetBool(waitParameter, _state);
+    }
+    public void SetDieAnimation(bool _state)
+    {
+        mecanim.SetBool(dieParameter, _state);
     }
 }
