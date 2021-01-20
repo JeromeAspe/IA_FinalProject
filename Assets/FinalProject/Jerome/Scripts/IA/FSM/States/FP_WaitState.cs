@@ -11,11 +11,12 @@ public class FP_WaitState : FP_State
 
         OnEnter += () =>
         {
+            _brain.Movement.SetMoveTarget(_brain.transform.position);
             _brain.Movement.SetStateNav(false);
         };
         OnExit += () =>
         {
-
+            
             _brain.FSM.SetBool(_brain.WaitParameter, false);
         };
     }
