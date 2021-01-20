@@ -50,6 +50,10 @@ public abstract class FP_PlayerBehaviour : MonoBehaviour,ITarget
         Life -= _damage;
         OnHit?.Invoke();
     }
+    public void Start()
+    {
+
+    }
 
     protected virtual void OnDestroy()
     {
