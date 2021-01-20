@@ -39,6 +39,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
     public float ReloadTimeValue => reloadTimeValue;
     public float FireRate => fireRate;
     public int BulletsNumberMax => bulletsNumberMax;
+    public int CurrentBulletsNumber => currentBulletsNumber;
     public float Timer => timer;
     public float DurationFx => durationFx;
 
@@ -90,7 +91,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 
     void Init()
     {
-        currentBulletsNumber = bulletsNumberMax;
+        //currentBulletsNumber = bulletsNumberMax;
 
         //OnShoot += () => SetReload();
         OnReload += () =>
@@ -162,7 +163,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 
     public void SetReload()
     {
-        currentBulletsNumber = bulletsNumberMax;
+        //currentBulletsNumber = bulletsNumberMax;
         isReload = true;
     }
 

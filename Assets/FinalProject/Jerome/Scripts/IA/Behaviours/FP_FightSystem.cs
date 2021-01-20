@@ -70,7 +70,7 @@ public class FP_FightSystem : MonoBehaviour, IShooter
     public void Shoot(bool _action)
     {
         if (!IsValid || !canShoot) return;
-        if (currentBulletNB <= 0)
+        if (currentBulletNB >= BulletsNumberMax)
         {
             OnReload?.Invoke();
             return;
