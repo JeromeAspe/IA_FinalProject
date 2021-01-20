@@ -29,7 +29,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
     //Private
     float timer = 0;
     [SerializeField] int currentBulletsNumber = 0;
-    bool isReload = false;
+    bool canShoot = true;
     Vector3 lastHitPoint = Vector3.zero;
 
 
@@ -121,12 +121,11 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 
     public void SetTimer()
     {
-        if (!isReload || !IsValid) return;
+        if (canShoot || !IsValid) return;
         timer += Time.deltaTime;
-        if (timer >= (currentBulletsNumber == 0 ? reloadTimeValue : fireRate))
+        if (timer >= fireRate)
         {
-            isReload = false;
-            if (currentBulletsNumber == 0) currentBulletsNumber = bulletsNumberMax;
+            canShoot = true;
             timer = 0;
         }
     }
@@ -134,13 +133,14 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 
     public void Shoot(bool _action)
     {
-        if (!_action || !IsValid || isReload) return;
+        if (!_action || !IsValid || !canShoot) return;
 
         if (currentBulletsNumber > 0)
         {
 
             currentBulletsNumber -= 1;
             OnShoot?.Invoke();
+            canShoot = false;
             bool _fireHit = Physics.Raycast(weapon.transform.position, ShootPointWithDistance, out RaycastHit _hit, shootDistance, aiMask);
             if (!_fireHit) return;
             lastHitPoint = _hit.point;
@@ -155,7 +155,9 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
 
     public void Reload(bool _action)
     {
-        if (!_action || !IsValid || !isReload) return;
+        
+        if (!_action || !IsValid || currentBulletsNumber == bulletsNumberMax) return;
+        
             OnReload?.Invoke();
             currentBulletsNumber = BulletsNumberMax;
     }
@@ -163,7 +165,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
     public void SetReload()
     {
         //currentBulletsNumber = bulletsNumberMax;
-        isReload = true;
+        //isReload = true;
     }
 
 
