@@ -28,6 +28,7 @@ public class FP_PlayerRootMovements : MonoBehaviour
     private void OnDestroy()
     {
         FP_InputManager.Instance.UnRegisterAxis(AxisAction.VerticalMove, SetVertical);
+        FP_InputManager.Instance.UnRegisterAxis(AxisAction.HorizontalMove, SetHorizontal);
         FP_InputManager.Instance.UnRegisterAxis(AxisAction.MouseX, SetHorizontal);
         //FP_InputManager.Instance.UnRegisterAxis(AxisAction.MouseX, SetRotateHorizontal);
         //FP_InputManager.Instance.UnRegisterAxis(AxisAction.MouseY, SetRotateVertical);
@@ -36,6 +37,7 @@ public class FP_PlayerRootMovements : MonoBehaviour
     {
         if (!mecanim) mecanim = GetComponent<Animator>();
         FP_InputManager.Instance.RegisterAxis(AxisAction.VerticalMove, SetVertical);
+        FP_InputManager.Instance.RegisterAxis(AxisAction.HorizontalMove, SetHorizontal);
         FP_InputManager.Instance.RegisterAxis(AxisAction.MouseX, SetHorizontal);
         //FP_InputManager.Instance.RegisterAxis(AxisAction.MouseX, SetRotateHorizontal);
         //FP_InputManager.Instance.RegisterAxis(AxisAction.MouseY, SetRotateVertical);
