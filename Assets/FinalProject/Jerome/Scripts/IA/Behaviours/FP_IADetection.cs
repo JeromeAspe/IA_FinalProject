@@ -37,7 +37,7 @@ public class FP_IADetection : MonoBehaviour
             OnUpdateDebug+= _data.DrawDetectionRay;
             OnUpdateDetection += () =>
             {
-                _data.Detection(playerLayer, obstacleLayer,startPosOffset-1);
+                _data.Detection(playerLayer, obstacleLayer,startPosOffset-1.5f/ maxDistance);
                 CheckDetection();
             };
             index++;
@@ -73,7 +73,7 @@ public class FP_IADetection : MonoBehaviour
     void UpdateDebug()
     {
         OnUpdateDebug?.Invoke();
-        startPosOffset = Mathf.PingPong(Time.time, 1);
+        startPosOffset = Mathf.PingPong(Time.time/5, 1.5f/maxDistance);
     }
     private void Update()
     {
