@@ -77,7 +77,6 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
     }
     void Update()
     {
-        Debug.Log(currentBulletsNumber);
         SetTimer();
     }
 
@@ -96,7 +95,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
         OnReload += () =>
         {
             bulletsNumberMax += 10;
-            //Debug.Log($"{currentBulletsNumber} / {bulletsNumberMax}");
+            Debug.Log($"{currentBulletsNumber} / {bulletsNumberMax}");
             SetReload();
             InstantiateSound(reloadSound, weapon.transform.position, 2);
             FP_UIManager.Instance?.UpdateWeaponCapacityUI(currentBulletsNumber, bulletsNumberMax);
@@ -114,6 +113,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
     {
         OnShoot = null;
         OnShootHit = null;
+        OnReload = null;
     }
 
 
@@ -140,13 +140,10 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
             bulletsNumberMax -= 1;
             OnShoot?.Invoke();
             bool _fireHit = Physics.Raycast(weapon.transform.position, ShootPointWithDistance, out RaycastHit _hit, shootDistance, aiMask);
-            //Debug.Log(_fireHit);
             if (!_fireHit) return;
             lastHitPoint = _hit.point;
-            //Debug.Log(_hit.point);
-            //Debug.Log("touché l'ennemi");
+            Debug.Log("touché l'ennemi");
             OnShootHit?.Invoke();
-            //Debug.Log("Number of ammo :" + bulletsNumberMax);
 
         }
 
@@ -158,6 +155,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
         if (!_action || !IsValid || !isReload) return;
         if (bulletsNumberMax <= 0)
         {
+            SetReload();
             OnReload?.Invoke();
             bulletsNumberMax += currentBulletsNumber;//put a maxvalue
         }
@@ -177,7 +175,6 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
         _effect.transform.localScale *= _sizeFX;
         AudioSource.PlayClipAtPoint(_audioResources, _position);
         Destroy(_effect, durationFx);
-        Destroy(_audioResources, durationFx);
     }
 
 
@@ -191,7 +188,6 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
    public void InstantiateSound(AudioClip _audioressources,Vector3 _position, float _duration)
     {
         AudioSource.PlayClipAtPoint(_audioressources,_position, _duration);
-        Destroy(_audioressources, durationFx);
     }
 
     public void SetWeaponActive()

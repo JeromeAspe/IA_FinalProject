@@ -1761,6 +1761,11 @@ PrefabInstance:
       propertyPath: reloadSound
       value: 
       objectReference: {fileID: 8300000, guid: 406c929b7299afb469c82778f8d15d5b, type: 3}
+    - target: {fileID: 3045354047359927248, guid: 4117f3a6d42e17f4b90ac02d9dbcfb65,
+        type: 3}
+      propertyPath: reloadTimeValue
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3045354047359927249, guid: 4117f3a6d42e17f4b90ac02d9dbcfb65,
         type: 3}
       propertyPath: id
@@ -2123,7 +2128,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3045354048878872686}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: e6360b41e77d19f45b3d2cf31d3732f3, type: 3}
+  m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b00ba3038713748419cb72564b4a5cb2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
