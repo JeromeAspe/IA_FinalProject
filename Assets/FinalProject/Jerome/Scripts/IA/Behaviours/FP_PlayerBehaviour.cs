@@ -15,6 +15,7 @@ public abstract class FP_PlayerBehaviour : MonoBehaviour,ITarget
 
     public Vector3 TargetPosition => transform.position;
 
+    public float MaxLife => maxLife;
     public bool IsDead => life <= 0;
 
     public bool NeedHeal => life < maxLife;

@@ -124,7 +124,7 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 		
 		
 		SetPositionRespawn();
-		life += maxLife;
+		AddLife(maxLife);
 		yield return new WaitForSeconds(1);
 		mecanim.SetBool(respawnParameter, true);
 		mecanim.applyRootMotion = true;
