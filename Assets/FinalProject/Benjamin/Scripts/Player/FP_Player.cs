@@ -45,11 +45,13 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 		InitHandledItem();
 		OnLife += (life) => FP_UIManager.Instance?.UpdatePlayerHealthSlider(life);
 		OnLife?.Invoke(life);
+		
+
 	}
 
 	private void Update()
 	{
-		Respawn();
+		//Respawn();
 	}
 
 	protected override void OnDestroy()
@@ -110,8 +112,8 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 
 	IEnumerator Dead()
 	{
+		mecanim.applyRootMotion = false;
 		mecanim.SetTrigger(deadParameter);
-		transform.position = respawnPoint.position;
 		yield return new WaitForSeconds(5);
 		Respawn();
 		yield return RespawnF();
@@ -119,10 +121,21 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 
 	IEnumerator RespawnF()
 	{
+		
 		mecanim.SetBool(respawnParameter, true);
-		transform.position = respawnPoint.position;
+		SetPositionRespawn();
 		life += maxLife;
+		yield return new WaitForSeconds(1);
+		mecanim.applyRootMotion = true;
 		yield return null;
+	}
+
+	public void SetPositionRespawn()
+    {
+		
+		gameObject.transform.position = respawnPoint.position;
+		
+		Debug.Log(transform.position);
 	}
 
 	
