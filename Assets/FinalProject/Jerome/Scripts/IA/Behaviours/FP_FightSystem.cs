@@ -13,6 +13,7 @@ public class FP_FightSystem : MonoBehaviour, IShooter
     ITarget target = null;
     [SerializeField] Transform weaponCanon = null;
     [SerializeField] GameObject fireEffect = null;
+    [SerializeField] AudioClip soundAtShoot = null;
     [SerializeField,Range(0,100)] float shootDistance = 10;
     [SerializeField,Range(0,5)] float reloadTimeValue = 1;
     [SerializeField,Range(0,10)] float fireRate = 1;
@@ -33,11 +34,12 @@ public class FP_FightSystem : MonoBehaviour, IShooter
 
         OnReload += () => Reload();
         OnAttack += () => Shoot(true);
-        if (weaponCanon && fireEffect)
+        if (weaponCanon && fireEffect && soundAtShoot)
         {
             OnShoot += () =>
             {
                 SpawnEffect(fireEffect,weaponCanon, 0.5f);
+                AudioSource.PlayClipAtPoint(soundAtShoot, weaponCanon.position);
             };
         }
     }

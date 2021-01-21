@@ -1818,6 +1818,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 1616094324669788948, guid: ea014a4892d83c141ac7e498fe2f65e9,
+        type: 3}
+      propertyPath: soundAtShoot
+      value: 
+      objectReference: {fileID: 8300000, guid: f19e3fdb9c8082647a2c32beca28ba84, type: 3}
     - target: {fileID: 1616094324669788949, guid: ea014a4892d83c141ac7e498fe2f65e9,
         type: 3}
       propertyPath: points.Array.size
