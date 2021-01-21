@@ -43,11 +43,11 @@ public class FP_Obstacle : MonoBehaviour
         //Debug.Log(Mathf.Abs(Vector3.Angle(_cover.transform.forward,_dir)));
         return Mathf.Abs(Vector3.Angle(_cover.transform.forward, _dir));
     }
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         for (int i = 0; i < covers.Length; i++)
         {
             Gizmos.DrawLine(covers[i].transform.position, target);
         }
-    }
+    }*/
 }
