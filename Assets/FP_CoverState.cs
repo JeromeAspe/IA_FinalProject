@@ -15,6 +15,7 @@ public class FP_CoverState : FP_State
         };
         OnUpdate += () =>
         {
+            //_brain.Movement.SetMoveTarget(_brain.CoverBehaviour.GetBestCover());
             _brain.Movement.MoveTo();
         };
         OnExit += () =>

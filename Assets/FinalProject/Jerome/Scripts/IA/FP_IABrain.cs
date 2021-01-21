@@ -16,7 +16,7 @@ public class FP_IABrain : MonoBehaviour
     [SerializeField] FP_IAAnimations animations = null;
     [SerializeField] FP_CoverBehaviour coverBehaviour = null;
 
-
+    ITarget target = null;
 
     string waitParameter = "wait";
     string patrolParameter = "patrol";
@@ -98,7 +98,7 @@ public class FP_IABrain : MonoBehaviour
                 fsm.SetBool(waitParameter, false);
                 fsm.SetBool(chaseParameter, false);
             }
-            else
+            else if (!fsm.GetBool(CoverParameter))
             {
                 fsm.SetBool(PatrolParameter, true);
                 fsm.SetBool(chaseParameter, false);
@@ -134,6 +134,7 @@ public class FP_IABrain : MonoBehaviour
             if (!IsEnabled) return;
             if (!_target.IsDead)
             {
+                target = _target;
                 coverBehaviour.SetTarget(_target.TargetPosition);
                 fsm.SetBool(attackParameter, true);
                 fightSystem.SetTarget(_target);
@@ -194,6 +195,13 @@ public class FP_IABrain : MonoBehaviour
             fsm.SetBool(coverParameter, true);
             fsm.SetBool(patrolParameter, false);
         };
+        iaPlayer.OnHit += () =>
+         {
+             if(target != null)
+             {
+                 coverBehaviour.SetTarget(target.TargetPosition);
+             }
+         };
         detection.OnCoverDetected += (_cover) =>
         {
             if (!IsEnabled) return;

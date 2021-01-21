@@ -145,7 +145,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
             Debug.Log(shootDistance);
             if (!_fireHit) return;
             lastHitPoint = _hit.point;
-            enemy.Life -= damage;
+            enemy.SetDamage(damage);
             Debug.Log("touché l'ennemi");
             OnShootHit?.Invoke();
 
