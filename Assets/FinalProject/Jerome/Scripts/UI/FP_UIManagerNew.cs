@@ -22,6 +22,7 @@ public class FP_UIManagerNew : MonoBehaviour
     private void Start()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
         if (!IsValid) return;
         if (playerLifeBar)
         {

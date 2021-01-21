@@ -8,10 +8,7 @@ public class FP_CoverBehaviour : MonoBehaviour
     [SerializeField] Vector3 target = Vector3.zero;
 
     public bool HasTarget { get; set; } = false;
-    private void Update()
-    {
-        Debug.Log(covers.Count);
-    }
+
     public void SetTarget(Vector3 _target)
     {
         target = _target;
