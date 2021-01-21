@@ -122,10 +122,11 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 	IEnumerator RespawnF()
 	{
 		
-		mecanim.SetBool(respawnParameter, true);
+		
 		SetPositionRespawn();
 		life += maxLife;
 		yield return new WaitForSeconds(1);
+		mecanim.SetBool(respawnParameter, true);
 		mecanim.applyRootMotion = true;
 		yield return null;
 	}

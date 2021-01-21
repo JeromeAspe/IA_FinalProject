@@ -59,7 +59,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
         get
         {
             if (!IsValid) return transform.position;
-            return weapon.transform.position + new Vector3(0, 0.1f, 0) + weapon.transform.forward * shootDistance;
+            return weapon.transform.forward;//weapon.transform.position + new Vector3(0, 0.1f, 0) + weapon.transform.forward * shootDistance;
 
 
         }
@@ -141,7 +141,8 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
             currentBulletsNumber -= 1;
             OnShoot?.Invoke();
             canShoot = false;
-            bool _fireHit = Physics.Raycast(weapon.transform.position, ShootPointWithDistance, out RaycastHit _hit, shootDistance, aiMask);
+            bool _fireHit = Physics.Raycast(weapon.transform.position, ShootPointWithDistance, out RaycastHit _hit, shootDistance,aiMask);
+            Debug.Log(shootDistance);
             if (!_fireHit) return;
             lastHitPoint = _hit.point;
             enemy.Life -= damage;
@@ -208,6 +209,7 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
         Gizmos.color = Color.cyan;
         Gizmos.DrawRay(weapon.transform.position + new Vector3(0, 0.1f, 0), weapon.transform.forward * shootDistance);
         Gizmos.DrawSphere(weapon.transform.position + new Vector3(0, 0.1f, 0) + weapon.transform.forward * shootDistance, .1f);
+        Gizmos.DrawSphere(lastHitPoint,1);
     }
     void DebugShootPoint()
     {
