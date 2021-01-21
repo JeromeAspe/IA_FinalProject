@@ -25,7 +25,7 @@ public class FP_Player : FP_PlayerBehaviour, IHandledItem<int>, ITarget
 	public bool IsValid => mecanim && movement && shooter;
 	public bool IsEnabled => isEnable;
 
-
+	public FP_PlayerShooter PlayerShooter => shooter;
 	public Vector3 PlayerPosition => transform.position;
 	public Vector3 CameraPosition => playerCameraSettings.TargetPosition + playerCameraSettings.Offset;
 
