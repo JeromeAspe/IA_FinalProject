@@ -141,10 +141,10 @@ public class FP_PlayerShooter : MonoBehaviour, IShooter, IEffects
             currentBulletsNumber -= 1;
             OnShoot?.Invoke();
             canShoot = false;
-            bool _fireHit = Physics.Raycast(weapon.transform.position, ShootPointWithDistance, out RaycastHit _hit, shootDistance,aiMask);
-            Debug.Log(shootDistance);
+            bool _fireHit = Physics.Raycast(weapon.transform.position, ShootPointWithDistance, out RaycastHit _hit, shootDistance, aiMask);
             if (!_fireHit) return;
             lastHitPoint = _hit.point;
+            if (enemy.IsDead) return;
             enemy.SetDamage(damage);
             Debug.Log("touché l'ennemi");
             OnShootHit?.Invoke();
