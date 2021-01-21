@@ -150,6 +150,7 @@ public class FP_IABrain : MonoBehaviour
             fsm.SetBool(attackParameter, false);
             if (iaPlayer.IsWounded)
             {
+                movement.SetMoveTarget(coverBehaviour.GetBestCover());
                 fsm.SetBool(coverParameter, true);
                 fsm.SetBool(patrolParameter, false);
             }
